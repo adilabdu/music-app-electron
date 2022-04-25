@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Hello from './components/Hello.vue'
+import Listen from './pages/listen.vue'
 import { ipcRenderer } from './electron'
 
 ipcRenderer.send('message', 'Hello from App.vue!');
@@ -7,6 +8,6 @@ ipcRenderer.send('message', 'Hello from App.vue!');
 
 <template>
   <div id="app">
-    <Hello/>
+    <Listen/>
   </div>
 </template>
