@@ -9,7 +9,9 @@
       <Header />
 
       <div class="flex justify-center h-full w-full">
-        <slot />
+
+        <router-view />
+
       </div>
 
     </section>
