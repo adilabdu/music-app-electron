@@ -29,15 +29,6 @@
       <AlbumCard class="2xl:inline lg:hidden" :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/maggie-rogers-heard-it-in-a-past-life-album-art-2019-billboard-1240.jpg?w=1024', artist: 'Maggie Rogers', title: 'Heard it in a Past Life' }" />
     </AlbumCarousel>
 
-    <AlbumCarousel title="New Releases">
-      <AlbumCard :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Vince-Staples-Vince-Staples-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Vince Staples', title: 'Vince Staples' }" />
-      <AlbumCard :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/05/J-Cole-The-Off-Season-album-art-2021-billboard-1240-1622132104.jpg?w=1024', artist: 'J. Cole', title: 'The Off Season' }" />
-      <AlbumCard :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/Taylor-Swift-Lover-album-art-2019-billboard-1240.jpg?w=1024', artist: 'Taylor Swift', title: 'Lover' }" />
-      <AlbumCard class="" :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Kanye-West-Donda-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Ye', title: 'Donda' }" />
-      <AlbumCard class="xl:inline lg:hidden" :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Justin-Bieber-Justice-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Justin Bieber', title: 'Justice' }" />
-      <AlbumCard class="2xl:inline lg:hidden" :track-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/maggie-rogers-heard-it-in-a-past-life-album-art-2019-billboard-1240.jpg?w=1024', artist: 'Maggie Rogers', title: 'Heard it in a Past Life' }" />
-    </AlbumCarousel>
-
   </ContentPage>
 
 </template>
