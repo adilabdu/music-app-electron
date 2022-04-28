@@ -6,7 +6,7 @@
 
 <script>
 
-  import ContentPage from "../components/ContentPage";
+  import ContentPage from "../components/ContentPage.vue";
 
   export default {
 

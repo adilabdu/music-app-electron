@@ -2,5 +2,9 @@ node_modules
 dist
 build
 
+./src/renderer/static/fonts/
+
 .vscode
 .idea
+
+.DS_Store
