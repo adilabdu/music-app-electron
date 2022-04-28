@@ -1,7 +1,7 @@
 <template>
 
   <AlbumCarousel title="New Releases">
-    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i].artwork, artist: tracks[i].artist, title: tracks[i].title }" />
+    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i].artwork, artist: tracks[i].artist, title: tracks[i].title, track: tracks[i].track, album: tracks[i].album }" />
   </AlbumCarousel>
 
 </template>
@@ -10,23 +10,12 @@
 
   import axios from "axios";
 
-  import { ref, onMounted, watch } from "vue";
-  import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+  import { ref, onMounted } from "vue";
 
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
 
-  const breakpoints = useBreakpoints(breakpointsTailwind)
-  const xxlAndLarger = breakpoints.greater('2xl')
-  const xl = breakpoints.xl
-  const lg = breakpoints.lg
-  const md = breakpoints.md
-
-  const display = ref(0)
-  watch([xl, lg, md], () => {
-    display.value = xl ? 6 : ( lg ? 5 : ( md ? 4 : 2 ) )
-    console.log({ 'display': display.value, 'xl': xl.value, 'lg': lg.value, 'md': md.value })
-  })
+  const display = ref(25)
 
   const tracks = ref()
   const loading = ref(true)
@@ -42,7 +31,8 @@
           title: track.title,
           album: track.album.title,
           artist: track.artist.name,
-          artwork: track.album['cover_medium']
+          artwork: track.album['cover_medium'],
+          track: track.preview
         }
       })
     }).finally(() => {
@@ -50,8 +40,6 @@
     })
 
   })
-
-
 
 </script>
 
