@@ -24,7 +24,7 @@
   import { ref, watch } from "vue"
   import { useElementSize } from "@vueuse/core"
 
-  import MediaPlayer from "./MediaPlayer/MediaPlayer.vue"
+  import MediaPlayer from "./MediaPlayer/MediaControls.vue"
 
   const relativeHeader = ref()
   const { width } = useElementSize(relativeHeader)
