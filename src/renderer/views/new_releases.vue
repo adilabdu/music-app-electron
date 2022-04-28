@@ -15,7 +15,7 @@
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
 
-  const display = ref(25)
+  const display = ref(50)
 
   const tracks = ref()
   const loading = ref(true)
