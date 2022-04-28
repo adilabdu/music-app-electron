@@ -1,5 +1,7 @@
+import { useStorage } from "@vueuse/core";
+
 const state = {
-    allPlaylists: []
+    allPlaylists: localStorage.getItem('allPlaylists') || []
 }
 
 const actions = {
@@ -12,6 +14,7 @@ const actions = {
 const mutations = {
     createPlaylist(state, payload) {
         state.allPlaylists.push(payload)
+        localStorage.setItem('allPlaylists', state.allPlaylists)
         console.log('4. Inside Vuex mutation: new Playlist object pushed to list of playlists: ', state.allPlaylists)
     }
 }
