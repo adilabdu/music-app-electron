@@ -42,7 +42,7 @@ async function startElectron() {
     electronProcess = ChildProcess.spawn(Electron, args);
 
     electronProcess.stdout.on('data', data => {
-        console.log(Chalk.blueBright(`[elecron] `) + Chalk.white(data.toString()));
+        console.log(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()));
     });
 
     electronProcess.stderr.on('data', data => {
@@ -60,9 +60,9 @@ function restartElectron() {
 }
 
 async function start() {
-    console.log(`${Chalk.blueBright('===============================')}`);
+    console.log(`${Chalk.blueBright('======================================')}`);
     console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`);
-    console.log(`${Chalk.blueBright('===============================')}`);
+    console.log(`${Chalk.blueBright('======================================')}`);
 
     const devServer = await startRenderer();
     rendererPort = devServer.config.server.port;
