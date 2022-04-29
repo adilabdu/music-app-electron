@@ -12,9 +12,9 @@
     </div>
 
     <div id="track" class="h-full w-full flex items-center justify-center mx-[5px] lg:mx-0">
-      <div id="trackArtwork" class="rounded-l-sm h-[44px] w-[44px] bg-[#323232] flex items-center justify-center">
+      <div id="trackArtwork" class="rounded-l-sm h-[44px] w-[44px] bg-[#323232] border-y border-l border-[#4D4D4D] flex items-center justify-center">
         <img v-if="track.artwork" :src="track.artwork" alt="Now playing" class="w-full object-cover rounded-l-sm">
-        <img v-else :src="logo" class="w-6 h-6 grayscale">
+        <TrackIcon v-else :width="16" :class="'fill-[#5F5F5F]'" />
       </div>
       <div id="trackInfo" class="group custom-group relative flex flex-col items-center rounded-r-sm h-[44px] max-w-full lg:max-w-[628px] grow bg-[#4D4D4D]" :style="{ width: (width * 0.35) + 'px' }">
 
@@ -36,9 +36,9 @@
           </p>
         </div>
 
-<!--        <div v-else class="flex items-center justify-center mb-[4px] h-full grayscale">-->
-<!--          <img :src="logo" class="w-6 h-6" />-->
-<!--        </div>-->
+        <div v-else class="flex items-center justify-center mb-[4px] h-full grayscale">
+          <img :src="logo" class="w-6 h-6" />
+        </div>
 
         <p id="trackTime" :class="playing ? 'group-hover:opacity-100' : ''" class="absolute left-0 bottom-0 text-[#FFFFFFA3] text-[10px] py-1 px-1.5 font-light opacity-0 transition duration-500">
           {{ currentTimeInMinutes }}
@@ -47,8 +47,7 @@
           {{ remainingTimeInMinutes }}
         </p>
         <input v-if="!store.state.player.emptyTrack" id="trackElapsed" type="range" :min="0" :max="duration" v-model="currentTime" class="z-10 absolute w-full rounded-br-sm h-1 left-0 bottom-0 appearance-none"
-               :style=" { background: currentTimeInPercent === 0 ? '#5F5F5F' : 'linear-gradient(to right, #B8B8B8 ' + currentTimeInPercent + '%, rgba(0, 0, 0, 0) ' + remainingTimeInPercent + '%)' } ">
-        <div id="trackBuffered" class="z-0 absolute w-full h-1 left-0 bottom-0 bg-[#5F5F5F]"></div>
+               :style=" { background: currentTimeInPercent === 0 ? '#5F5F5F' : 'linear-gradient(to right, #B8B8B8 ' + currentTimeInPercent + '%, #5F5F5F ' + remainingTimeInPercent + '%)' } ">
 
       </div>
     </div>
@@ -67,8 +66,8 @@
         <div>
           <ListIcon :class="'fill-[#B8B8B8]'" :width="16" />
         </div>
-        <div id="profile" class="w-[28px] h-[28px] rounded-full bg-[#FF8400]">
-          <img :src="profileImage" class="w-full object-cover aspect-auto overflow-hidden rounded-full" />
+        <div id="profile" class="w-[28px] h-[28px] rounded-full bg-[#FF8400] opacity-50">
+<!--          <img :src="profileImage" class="w-full object-cover aspect-auto overflow-hidden rounded-full" />-->
         </div>
 
       </div>
@@ -93,8 +92,9 @@
   import SkipIcon from "../Icons/skip.vue"
   import ListIcon from "../Icons/list.vue"
   import VolumeIcon from "../Icons/volume.vue"
+  import TrackIcon from "../Icons/track.vue"
 
-  import profileImage from "../../static/profile.jpeg";
+  // import profileImage from "../../static/profile.jpeg";
 
   const props = defineProps({
     width: {
