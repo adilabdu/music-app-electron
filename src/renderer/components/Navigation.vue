@@ -1,6 +1,6 @@
 <template>
 
-  <aside class="fixed h-screen w-0 md:w-[259px] bg-[#272728] flex flex-col px-[25px] border-r border-[#404040]">
+  <aside class="fixed h-screen w-0 md:w-[259px] bg-[#272728] flex flex-col md:px-[25px] overflow-clip border-r border-[#404040]">
 
     <div class="h-[55px] w-full flex items-center justify-start gap-1">
       <img :src="logo" class="w-6 h-6" />
