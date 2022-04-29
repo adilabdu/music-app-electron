@@ -3,6 +3,7 @@
   <ContentPage page-title="Listen Now">
 
     <NewReleases />
+    <HipHopHits />
 
   </ContentPage>
 
@@ -12,6 +13,7 @@
 
   import ContentPage from '../components/ContentPage.vue';
   import NewReleases from "../views/new_releases.vue";
+  import HipHopHits from "../views/hip_hop_hits.vue"
 
 </script>
 
