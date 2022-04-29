@@ -48,9 +48,7 @@
     store.dispatch('duration', duration.value)
 
     if(currentTime.value === duration.value) {
-      store.dispatch('pause')
-      store.dispatch('currentTime')
-      store.dispatch('unloadTrack')
+      store.dispatch('resetPlayer')
     }
 
   })
@@ -58,6 +56,11 @@
   const volumeBar = computed(() => (store.state.player.volume / 100))
   watch(volumeBar, () => {
     volume.value = volumeBar.value
+  })
+
+  const currentTimeBar = computed(() => (store.state.player.currentTime))
+  watch(currentTimeBar, () => {
+    currentTime.value = currentTimeBar.value
   })
 
   const play = computed(() => store.state.player.playing)
