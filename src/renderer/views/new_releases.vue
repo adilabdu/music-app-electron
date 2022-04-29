@@ -1,6 +1,6 @@
 <template>
 
-  <AlbumCarousel title="New Releases">
+  <AlbumCarousel :loading="loading" title="New Releases">
     <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i].artwork, artist: tracks[i].artist, title: tracks[i].title, track: tracks[i].track, album: tracks[i].album }" />
   </AlbumCarousel>
 
