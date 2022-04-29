@@ -57,13 +57,11 @@
       const loadedTrack = computed(() => store.state.player.currentTrack.track)
 
       function startPlaying() {
-        console.log('1. startPlaying triggered with data: ', props.trackInfo.track)
         store.dispatch('loadTrack', props.trackInfo)
         store.dispatch('play')
       }
 
       function pausePlaying() {
-        console.log('Handle Pause')
         store.dispatch('pause')
       }
 
@@ -74,13 +72,6 @@
       function pauseMe() {
         return playing.value && (loadedTrack.value === props.trackInfo.track)
       }
-
-      onMounted(() => {
-        console.log({
-          'playMe': playMe(),
-          'pauseMe': pauseMe()
-        })
-      })
 
       return { startPlaying, pausePlaying, playMe, pauseMe }
 
