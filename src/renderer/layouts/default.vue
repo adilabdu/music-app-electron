@@ -4,14 +4,14 @@
 
     <Navigation />
 
-    <section class="relative min-h-screen grow bg-[#202020] flex flex-col">
+    <section class="relative max-h-screen grow bg-[#202020] flex flex-col">
 
-      <Header />
+      <div class="w-full h-[55px]">
+        <Header />
+      </div>
 
-      <div class="flex justify-center h-full w-full">
-
+      <div id="mainContent" class="flex justify-center overflow-auto w-full">
         <router-view />
-
       </div>
 
     </section>
@@ -27,3 +27,28 @@ import Header from "../components/Header.vue";
 import ContentPage from "../components/ContentPage.vue";
 
 </script>
+
+<style scoped>
+
+  #mainContent {
+    overflow: auto;
+  }
+
+  #mainContent::-webkit-scrollbar {
+    width: 16px;
+  }
+  #mainContent::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+  }
+  #mainContent::-webkit-scrollbar-thumb {
+    background-color: #747474;
+    border-radius: 6px;
+    border: 4px solid rgba(0,0,0,0);
+    background-clip: content-box;
+  }
+
+  #mainContent::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+  }
+
+</style>
