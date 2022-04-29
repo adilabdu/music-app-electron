@@ -1,4 +1,4 @@
-import { useMediaControls} from "@vueuse/core";
+import store from "../index";
 
 const state = {
     playing: false,
@@ -39,6 +39,10 @@ const actions = {
 
     unloadTrack(context) {
         context.commit('unloadTrack')
+    },
+
+    resetPlayer(context) {
+        context.commit('resetPlayer')
     }
 
 }
@@ -68,13 +72,19 @@ const mutations = {
     loadTrack(state, payload) {
         state.currentTrack = payload
         state.emptyTrack = false
-        console.log('2. loadTrack mutation performed, with currentTrack now: ', state.currentTrack)
     },
 
     unloadTrack(state) {
         state.currentTrack = {}
         state.emptyTrack = true
-        console.log('3. unloadTrack mutation performed, with currentTrack now: ', state.currentTrack)
+    },
+
+    resetPlayer(state) {
+        state.playing = false
+        state.currentTime = 0
+        state.duration = 0
+        state.currentTrack = {}
+        state.emptyTrack = true
     }
 
 }
