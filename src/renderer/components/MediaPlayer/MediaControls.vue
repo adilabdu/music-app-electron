@@ -40,10 +40,10 @@
           <img :src="logo" class="w-6 h-6" />
         </div>
 
-        <p id="trackTime" :class="playing ? 'group-hover:opacity-100' : ''" class="absolute left-0 bottom-0 text-[#FFFFFFA3] text-[10px] py-1 px-1.5 font-light opacity-0 transition duration-500">
+        <p v-if="!store.state.player.emptyTrack" id="trackTime" :class="playing ? 'group-hover:opacity-100' : ''" class="absolute left-0 bottom-0 text-[#FFFFFFA3] text-[10px] py-1 px-1.5 font-light opacity-0 transition duration-500">
           {{ currentTimeInMinutes }}
         </p>
-        <p id="trackTimeLeft" class="absolute right-0 bottom-0 text-[#FFFFFFA3] text-[10px] py-1 px-1.5 font-light opacity-0 group-hover:opacity-100 transition duration-500">
+        <p v-if="!store.state.player.emptyTrack" id="trackTimeLeft" class="absolute right-0 bottom-0 text-[#FFFFFFA3] text-[10px] py-1 px-1.5 font-light opacity-0 group-hover:opacity-100 transition duration-500">
           {{ remainingTimeInMinutes }}
         </p>
         <input v-if="!store.state.player.emptyTrack" id="trackElapsed" type="range" :min="0" :max="duration" v-model="currentTime" class="z-10 absolute w-full rounded-br-sm h-1 left-0 bottom-0 appearance-none"
@@ -105,7 +105,6 @@
 
   const track = computed(() => store.state.player.currentTrack)
   const playing = computed(() => store.state.player.playing)
-  const currentTime = computed(() => store.state.player.currentTime)
   const duration = computed(() => store.state.player.duration)
 
   const volume = ref(store.state.player.volume * 100)
@@ -113,8 +112,17 @@
     store.dispatch('volume', volume.value)
   })
 
+  const currentTime = ref(store.state.player.currentTime)
+  const currentTimeStore = computed(() => store.state.player.currentTime)
+  watch(currentTimeStore, () => {
+    currentTime.value = currentTimeStore.value
+  })
+
+  watch(currentTime, () => {
+    store.dispatch('currentTime', currentTime.value)
+  })
+
   watch(track, () => {
-    console.log('3. Track changed: ', track.value)
     playerKey.value += 1
   })
 
