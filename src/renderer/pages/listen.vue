@@ -2,8 +2,9 @@
 
   <ContentPage page-title="Listen Now">
 
-    <NewReleases />
-    <HipHopHits />
+    <DeezerPlaylist :playlistID="'658600625'" :title="'New Releases'" />
+    <DeezerPlaylist :playlistID="'7662551722'" :title="'2010\'s Raps'" />
+    <DeezerPlaylist :playlistID="'1677006641'" :title="'Hip-Hop Hits'" />
 
   </ContentPage>
 
@@ -12,8 +13,7 @@
 <script setup>
 
   import ContentPage from '../components/ContentPage.vue';
-  import NewReleases from "../views/new_releases.vue";
-  import HipHopHits from "../views/hip_hop_hits.vue"
+  import DeezerPlaylist from "../views/DeezerPlaylist.vue"
 
 </script>
 
