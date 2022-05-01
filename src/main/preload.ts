@@ -1,4 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
+const { readDirectory, readFile } = require('./fs/disk');
+
 const playlist = require('./database/models/playlist.model')
 
 const getNames = () => {
@@ -16,4 +18,8 @@ contextBridge.exposeInMainWorld('api', {
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: ipcRenderer,
+})
+
+contextBridge.exposeInMainWorld('io', {
+  readFile: readFile
 })
