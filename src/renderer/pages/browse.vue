@@ -2,6 +2,10 @@
 
   <ContentPage page-title="Browse">
 
+    <AlbumCarousel :loading="readingDirectory" :display="5" title="Local Files">
+      <AlbumCard v-if="readingDirectory === false" v-for="i in Object.keys(files).length" :key="i" :track-info="{ title: files[i-1] }" />
+    </AlbumCarousel>
+
     <AlbumCarousel title="Recently Played">
       <AlbumCard :track-info="{ artwork: 'static/artworks/Fleetwood-Mac-Rumours-1-1.webp', artist: 'Fleetwood Mac', title: 'Rumors' }" />
       <AlbumCard :track-info="{ artwork: 'static/artworks/Kendrick-Lamar-To-Pimp-a-Butterfly.webp', artist: 'Kendrick Lamar', title: 'To Pimp a Butterfly' }" />
@@ -35,9 +39,43 @@
 
 <script setup>
 
+  import { onMounted, ref, watch } from "vue";
+
   import ContentPage from '../components/ContentPage.vue';
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
+
+  onMounted(() => {
+
+    // window.io.readFile('asitwas.mp3').then((r) => {
+    //   window.io.parseAudio(r.buffer).then((r) => {
+    //     console.log('Audio tags: ', r)
+    //   })
+    // })
+
+    window.io.readDirectory().then((r) => {
+      files.value = Object.values(r[0]);
+      readFile()
+    }).catch(error => { console.log('error reading directory:', error) })
+      .finally(() => { readingDirectory.value = false })
+
+  })
+
+  const buffers = ref()
+  function readFile() {
+    for (let i = 0; i < Object.keys(files.value).length; i++) {
+
+      console.log(files.value[i])
+      window.io.readFile(files.value[i]).then((r) => {
+        // handle file parsing
+      })
+
+    }
+  }
+
+  const files = ref([])
+  const readingDirectory = ref(true)
+
 
 </script>
 
