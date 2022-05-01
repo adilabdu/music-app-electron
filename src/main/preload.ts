@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 const { readDirectory, readFile } = require('./fs/disk');
+const { parseAudio } = require('./metadata/index')
 
 const playlist = require('./database/models/playlist.model')
 
@@ -21,5 +22,7 @@ contextBridge.exposeInMainWorld('electron', {
 })
 
 contextBridge.exposeInMainWorld('io', {
-  readFile: readFile
+  readDirectory: readDirectory,
+  readFile: readFile,
+  parseAudio: parseAudio
 })
