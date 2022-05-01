@@ -1,7 +1,7 @@
 <template>
 
-  <AlbumCarousel :display="display" :loading="loading" :title="title">
-    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i].artwork, artist: tracks[i].artist, title: tracks[i].title, track: tracks[i].track, album: tracks[i].album }" />
+  <AlbumCarousel @previous="fetchPrevious" @next="fetchNext" :display="display" :loading="loading" :title="title" :available="{ next: !! next, prev: !! prev }">
+    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i-1].artwork, artist: tracks[i-1].artist, title: tracks[i-1].title, track: tracks[i-1].track, album: tracks[i-1].album }" />
   </AlbumCarousel>
 
 </template>
@@ -10,7 +10,7 @@
 
   import axios from "axios";
 
-  import { ref, onMounted, computed, watch } from "vue";
+  import { ref, onMounted, onBeforeMount, computed, watch } from "vue";
   import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 
   import AlbumCarousel from "../components/AlbumCarousel.vue";
@@ -41,28 +41,47 @@
   })
 
   const tracks = ref()
+  const total = ref(null)
+  const next = ref(null)
+  const prev = ref(null)
   const loading = ref(true)
-  onMounted(() => {
 
-    axios.get('https://cors-adil.herokuapp.com/https://api.deezer.com/playlist/' + props.playlistID, {
+  onMounted(() => {
+    fetch('https://cors-adil.herokuapp.com/https://api.deezer.com/playlist/' + props.playlistID + '/tracks?limit=' + display.value)
+  })
+
+  function fetchPrevious() {
+    fetch('https://cors-adil.herokuapp.com/' + prev.value)
+  }
+
+  function fetchNext() {
+    fetch('https://cors-adil.herokuapp.com/' + next.value)
+  }
+
+  function fetch(url) {
+    loading.value = true
+    axios.get(url, {
       headers: {
         'Access-Control-Allow-Origin': '*'
       }
     }).then((response) => {
-      tracks.value = response.data.tracks.data.map(track => {
+      total.value = response.data['total']
+      next.value = response.data['next'] ? response.data['next'] : null
+      prev.value = response.data['prev'] ? response.data['prev'] : null
+      tracks.value = response.data.data.map(track => {
         return {
           title: track.title,
           album: track.album.title,
           artist: track.artist.name,
-          artwork: track.album['cover_medium'],
+          artwork: track.album['cover_medium'] ? track.album['cover_medium'] : '',
           track: track.preview
         }
       })
-    }).finally(() => {
+      console.log('tracks is', tracks.value[0].artwork)
+    }).catch(err => console.error(err)).finally(() => {
       loading.value = false
     })
-
-  })
+  }
 
 </script>
 
