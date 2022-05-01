@@ -1,5 +1,5 @@
-import {app, BrowserWindow, ipcMain} from 'electron';
-import {join} from 'path';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { join } from 'path';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
@@ -26,6 +26,34 @@ function createWindow () {
   }
 }
 
+function createMiniPlayer () {
+  const window = new BrowserWindow({
+    width: 300,
+    height: 300,
+    minWidth: 300,
+    minHeight: 300,
+    webPreferences: {
+      preload: join(__dirname, 'preload.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+    autoHideMenuBar: true,
+    titleBarStyle: "customButtonsOnHover"
+  });
+
+  if (process.env.NODE_ENV === 'development') {
+    const rendererPort = process.argv[2];
+    window.loadURL(`http://localhost:${rendererPort}/mini.html`);
+  }
+  else {
+    window.loadFile(join(app.getAppPath(), 'renderer', 'mini.html'));
+  }
+}
+
+ipcMain.on('mini-player', () => {
+  createMiniPlayer()
+})
+
 app.whenReady().then(() => {
   createWindow();
 
@@ -44,4 +72,9 @@ app.on('window-all-closed', function () {
 
 ipcMain.on('message', (event, message) => {
   console.log(message);
+})
+
+let dir
+ipcMain.on('files_directory', (directory) => {
+  dir = directory
 })
