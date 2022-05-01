@@ -12,7 +12,10 @@
     </div>
 
     <div id="track" class="h-full w-full flex items-center justify-center mx-[5px] lg:mx-0">
-      <div id="trackArtwork" class="rounded-l-sm h-[44px] w-[44px] bg-[#323232] border-y border-l border-[#4D4D4D] flex items-center justify-center">
+      <div id="trackArtwork" class="relative rounded-l-sm h-[44px] w-[44px] bg-[#323232] border-y border-l border-[#4D4D4D] flex items-center justify-center">
+        <div class="group opacity-0 hover:opacity-100 absolute w-full h-full rounded-l-sm flex items-center justify-center bg-black bg-opacity-25 cursor-pointerx">
+          <MinimizeIcon @click="openMiniPlayer" :class="'fill-[#FFFFFFEB] group-hover:opacity-100 opacity-0'" :width="18" :stroke="{color: '#FFFFFFEB', width: 12 }" />
+        </div>
         <img v-if="track.artwork" :src="track.artwork" alt="Now playing" class="w-full object-cover rounded-l-sm">
         <TrackIcon v-else :width="16" :class="'fill-[#5F5F5F]'" />
       </div>
@@ -80,6 +83,8 @@
 
 <script setup>
 
+  import {ipcRenderer} from "../../electron";
+
   import { toRefs, ref, onMounted, watch, computed } from "vue"
 
   import logo from "../../static/favicon.png"
@@ -93,6 +98,7 @@
   import ListIcon from "../Icons/list.vue"
   import VolumeIcon from "../Icons/volume.vue"
   import TrackIcon from "../Icons/track.vue"
+  import MinimizeIcon from "../Icons/mini.vue"
 
   // import profileImage from "../../static/profile.jpeg";
 
@@ -162,6 +168,10 @@
 
   // Key to remount MediaPlayer component
   const playerKey = ref(0)
+
+  function openMiniPlayer() {
+    ipcRenderer.send('mini-player')
+  }
 
 </script>
 
