@@ -1,6 +1,6 @@
 <template>
 
-  <main class="grow w-full text-white max-w-[1600px]" style="padding: 24px 0;">
+  <main class="min-h-screen grow w-full text-white max-w-[1600px]" style="padding: 24px 0 0 0;">
 
     <h1 class="text-[34px] text-[#EFEFEF] font-semibold capitalize mb-[6px] px-[40px]">{{ pageTitle }}</h1>
     <div class="px-[40px]">
@@ -8,6 +8,9 @@
     </div>
 
     <slot />
+
+    <!-- Fixes the issue of overflow-auto on flex items-->
+    <div class="w-full border-2 border-[rgba(0,0,0,0)]" />
 
   </main>
 
