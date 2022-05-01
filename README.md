@@ -1,6 +1,6 @@
 <div align="center"> 
 
-![image](./orange-music.jpeg)
+![image](./screenshot.jpg)
 
 A **Vue3** + **Electron** TypeScript based Apple Music clone application, including **ViteJS** and **Electron Builder**.
 </div>
@@ -11,10 +11,11 @@ An Apple Music clone desktop application made with Electron, Vue JS and Tailwind
 to collect track data and displays popular playlist with previews for each track.
 
 
-#### Install dependencies ⏬
+#### Install dependencies & build native node modules
 
 ```bash
 npm install
+./node_modules/.bin/.electron-rebuild
 ```
 
 #### Run the Development Server
