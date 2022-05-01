@@ -13,6 +13,7 @@ function createWindow () {
       contextIsolation: true,
     },
     autoHideMenuBar: true,
+    icon: './Icon.icns'
   });
 
   mainWindow.webContents.openDevTools();
