@@ -14,6 +14,9 @@
         <router-view />
       </div>
 
+      <footer class="w-full">
+      </footer>
+
     </section>
 
   </div>
