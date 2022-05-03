@@ -2,13 +2,12 @@
 
   <ContentPage page-title="Browse">
 
-    <AlbumCarousel :add-function="true" :loading="readingDirectory" :display="5" title="Local Files">
+    <AlbumCarousel :add-function="true" title="Local Files">
 
       <template #function>
         <AddLocationFunction />
       </template>
 
-      <AlbumCard v-if="readingDirectory === false" v-for="i in Object.keys(files).length" :key="i" :track-info="{ title: files[i-1] }" />
     </AlbumCarousel>
 
     <AlbumCarousel title="Recently Played">
@@ -50,37 +49,6 @@
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
   import AddLocationFunction from "../views/AddLocationFunction.vue";
-
-  onMounted(() => {
-
-    // window.io.readFile('asitwas.mp3').then((r) => {
-    //   window.io.parseAudio(r.buffer).then((r) => {
-    //     console.log('Audio tags: ', r)
-    //   })
-    // })
-
-    window.io.readDirectory().then((r) => {
-      files.value = Object.values(r[0]);
-      readFile()
-    }).catch(error => { console.log('error reading directory:', error) })
-      .finally(() => { readingDirectory.value = false })
-
-  })
-
-  const buffers = ref()
-  function readFile() {
-    for (let i = 0; i < Object.keys(files.value).length; i++) {
-
-      console.log(files.value[i])
-      window.io.readFile(files.value[i]).then((r) => {
-        // handle file parsing
-      })
-
-    }
-  }
-
-  const files = ref([])
-  const readingDirectory = ref(true)
 
 
 </script>
