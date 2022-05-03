@@ -1,6 +1,6 @@
 <template>
 
-  <FunctionCard @clicked="getDirectory" class="function-card" :function-info="{ name: 'Add Location', description: 'Add a local location to populate your music library.' }">
+  <FunctionCard @clicked="getDirectory" class="function-card" :function-info="{ name: 'Add Location', description: 'Import your music library.' }">
 
     <template #icon>
       <PlusIcon class="function-icon" :width="48" :class="'fill-[#818181]'" />
