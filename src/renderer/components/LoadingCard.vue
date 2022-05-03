@@ -3,8 +3,8 @@
   <article class="flex flex-col min-w-[144px]">
     <div class="relative w-full aspect-square rounded-sm animate-pulse bg-[#4D4D4D] bg-opacity-50" />
     <div class="pt-[6px] flex flex-col justify-around gap-0.5">
-      <div class="bg-[#4D4D4D] bg-opacity-50 animate-[pulse_2s_100ms_cubic-bezier(0.4,0,0.6,1)_infinite] h-3 w-[50%]"></div>
-      <div class="bg-[#4D4D4D] bg-opacity-50 animate-pulse h-3 w-[35%]" />
+      <div class="bg-[#4D4D4D] bg-opacity-50 animate-[pulse_2s_100ms_cubic-bezier(0.4,0,0.6,1)_infinite] h-3" :style="{ width: titleWidth + '%' }"></div>
+      <div class="bg-[#4D4D4D] bg-opacity-50 animate-pulse h-3" :style="{ width: albumWidth + '%' }" />
     </div>
   </article>
 
@@ -12,7 +12,7 @@
 
 <script>
 
-  import { onMounted, computed } from "vue"
+  import { onMounted, ref, computed } from "vue"
 
   import store from "../store"
 
@@ -32,6 +32,19 @@
       }
     },
     setup(props) {
+
+      const titleWidth = ref(0)
+      const albumWidth = ref(0)
+      onMounted(() => {
+        titleWidth.value = numberBetween(25, 65)
+        albumWidth.value = numberBetween(25, 65)
+      })
+
+      function numberBetween(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+      }
 
       const playing = computed(() => store.state.player.playing)
       const loadedTrack = computed(() => store.state.player.currentTrack.track)
@@ -53,7 +66,7 @@
         return playing.value && (loadedTrack.value === props.trackInfo.track)
       }
 
-      return { startPlaying, pausePlaying, playMe, pauseMe }
+      return { startPlaying, pausePlaying, playMe, pauseMe, titleWidth, albumWidth }
 
     }
   }
