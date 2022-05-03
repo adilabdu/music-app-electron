@@ -2,7 +2,12 @@
 
   <ContentPage page-title="Browse">
 
-    <AlbumCarousel :loading="readingDirectory" :display="5" title="Local Files">
+    <AlbumCarousel :add-function="true" :loading="readingDirectory" :display="5" title="Local Files">
+
+      <template #function>
+        <AddLocationFunction />
+      </template>
+
       <AlbumCard v-if="readingDirectory === false" v-for="i in Object.keys(files).length" :key="i" :track-info="{ title: files[i-1] }" />
     </AlbumCarousel>
 
@@ -44,6 +49,7 @@
   import ContentPage from '../components/ContentPage.vue';
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
+  import AddLocationFunction from "../views/AddLocationFunction.vue";
 
   onMounted(() => {
 

@@ -69,7 +69,7 @@
         <ul id="test" class="relative flex flex-col gap-[2px] text-[15px] items-start text-[#EFEFEF] w-full mb-[16px]">
           <li v-for="playlist in userPlaylists" class="h-[32px] rounded-md w-full py-[1px] flex justify-start items-center gap-4 px-2">
             <PlaylistIcon :width="16" :class="'fill-[#B9B9B9]'" />
-            <a href="#" class="truncate">{{ playlist.title }}</a>
+            <a href="#" class="truncate">{{ playlist['name'] }}</a>
           </li>
         </ul>
       </div>
@@ -107,7 +107,7 @@
   const active = computed(() => route.currentRoute.value.path)
 
   function createPlaylist() {
-    window.api.setName('contexts 📚')
+    window.api.setName('ORANGE 🍊')
     userPlaylists.value = window.api.getNames()
   }
 

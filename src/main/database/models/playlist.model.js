@@ -7,7 +7,7 @@ exports.getNames = () => {
 }
 
 exports.setNames = (title, description = null) => {
-    let query = `INSERT INTO playlists ('title', 'description')`
+    let query = `INSERT INTO playlists ('name', 'description')`
     let values
     if(description === null) {
         values = ` VALUES ('${title}', null)`
