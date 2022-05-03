@@ -15,9 +15,10 @@
       </div>
       <div class="min-w-[25px] lg:hidden">&nbsp;</div>
 
-        <LoadingCard v-for="i in display" v-if="loading" />
+      <slot name="function" />
 
-        <slot v-else />
+      <LoadingCard v-for="i in display" v-if="loading" />
+      <slot v-else />
 
       <div v-if="available.next" @click="next" class="overflow-hidden paginator flex items-center justify-center absolute right-0 z-10 w-0 overflow-hidden lg:w-[40px] h-full cursor-pointer transition duration-300">
         <NextIcon class="paginator-button" :class="'group-hover:opacity-100 opacity-0 transition duration-300'" :width="8" :stroke="{width: 30, color: 'white'}" />
@@ -35,6 +36,7 @@
   import { useWindowSize } from "@vueuse/core"
 
   import LoadingCard from "./LoadingCard.vue";
+  import FunctionCard from "./FunctionCard.vue"
   import NextIcon from "./Icons/next.vue"
   import PreviousIcon from "./Icons/prev.vue"
 
@@ -43,7 +45,8 @@
     components: {
       LoadingCard,
       NextIcon,
-      PreviousIcon
+      PreviousIcon,
+      FunctionCard
     },
     emits: ['next', 'prev'],
     props: {
@@ -63,6 +66,10 @@
           'prev': false,
           'next': false
         }
+      },
+      addFunction: {
+        type: Boolean,
+        default: false
       }
     },
     setup(props, { emit }) {
