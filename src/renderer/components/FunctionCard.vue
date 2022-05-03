@@ -1,7 +1,7 @@
 <template>
 
   <article @click.prevent="clicked" class="flex flex-col min-w-[144px] cursor-pointer function-card">
-    <div class="relative w-full aspect-square rounded-sm bg-[#4D4D4D] bg-opacity-50 transition-colors duration-300 flex items-center justify-center function-button">
+    <div class="relative w-full aspect-square rounded-md bg-[#4D4D4D] bg-opacity-50 transition-colors duration-300 flex items-center justify-center function-button">
       <slot name="icon" />
     </div>
     <div class="pt-[6px] flex flex-col justify-around gap-0.5">
