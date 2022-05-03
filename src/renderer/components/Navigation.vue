@@ -86,8 +86,6 @@
   import {computed, watch, onMounted, ref, onBeforeUnmount} from "vue"
   import route from '../router/index'
 
-  import Playlist from '../models/playlist'
-
   import logo from "../static/favicon.png"
   import SearchIcon from "./Icons/search.vue"
   import PlayRoundIcon from "./Icons/play_round.vue"
