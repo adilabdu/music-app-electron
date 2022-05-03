@@ -1,6 +1,6 @@
 <template>
 
-  <section class="flex flex-col gap-[15px] my-[30px] min-w-0 group">
+  <section class="flex flex-col gap-[15px] my-[30px] min-w-0 album-card">
 
     <div class="flex justify-between items-center w-full px-[40px]">
       <h2 class="text-[17px] font-semibold">{{ title }}</h2>
@@ -11,7 +11,7 @@
          :style="{ width: carouselWidth + 'px' }">
 
       <div v-if="available.prev" @click="previous" class="overflow-hidden paginator flex items-center justify-center absolute z-10 w-0 overflow-hidden lg:w-[40px] h-full cursor-pointer transition duration-300">
-        <PreviousIcon class="paginator-button" :class="'group-hover:opacity-100 opacity-0 transition duration-300'" :width="8" :stroke="{width: 30, color: 'white'}" />
+        <PreviousIcon class="paginator-button" :class="'opacity-0 transition duration-300'" :width="8" :stroke="{width: 30, color: 'white'}" />
       </div>
       <div class="min-w-[25px] lg:hidden">&nbsp;</div>
 
@@ -21,7 +21,7 @@
       <slot v-else />
 
       <div v-if="available.next" @click="next" class="overflow-hidden paginator flex items-center justify-center absolute right-0 z-10 w-0 overflow-hidden lg:w-[40px] h-full cursor-pointer transition duration-300">
-        <NextIcon class="paginator-button" :class="'group-hover:opacity-100 opacity-0 transition duration-300'" :width="8" :stroke="{width: 30, color: 'white'}" />
+        <NextIcon class="paginator-button" :class="'opacity-0 transition duration-300'" :width="8" :stroke="{width: 30, color: 'white'}" />
       </div>
       <div class="min-w-[25px] lg:hidden">&nbsp;</div>
     </div>
@@ -118,8 +118,12 @@
     height: 0;
   }
 
-  .paginator:hover .paginator-button {
+  .paginator:hover > .paginator-button {
     @apply stroke-white stroke-[60] scale-125;
+  }
+
+  .album-card:hover .paginator-button {
+    @apply opacity-100;
   }
 
 </style>
