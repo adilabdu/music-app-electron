@@ -1,24 +1,7 @@
-export default class Artist {
+import { Model } from './models'
 
-    constructor(name, picture = null) {
-        this.name = name
-        this.picture = picture
-    }
+export class Artist extends Model {
 
-    getName() {
-        return this.name
-    }
-
-    setName(name) {
-        this.name = name
-    }
-
-    getPicture() {
-        return this.picture
-    }
-
-    setPicture(picture) {
-        this.picture = picture
-    }
+    static table = 'artists'
 
 }
