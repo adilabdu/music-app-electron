@@ -1,7 +1,7 @@
 <template>
 
   <AlbumCarousel @previous="fetchPrevious" @next="fetchNext" :display="display" :loading="loading" :title="title" :available="{ next: !! next, prev: !! prev }">
-    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :track-info="{ artwork: tracks[i-1].artwork, artist: tracks[i-1].artist, title: tracks[i-1].title, track: tracks[i-1].track, album: tracks[i-1].album }" />
+    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :album-info="{ artwork: tracks[i-1].artwork, artist: tracks[i-1].artist, title: tracks[i-1].title, track: tracks[i-1].track, album: tracks[i-1].album }" />
   </AlbumCarousel>
 
 </template>
