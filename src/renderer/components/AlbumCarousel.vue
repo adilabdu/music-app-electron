@@ -2,7 +2,7 @@
 
   <section class="flex flex-col gap-[15px] my-[30px] min-w-0 album-card">
 
-    <div class="flex justify-between items-center w-full px-[40px]">
+    <div v-if="!!title" class="flex justify-between items-center w-full px-[40px]">
       <h2 class="text-[17px] font-semibold">{{ title }}</h2>
       <a href="#" class="text-[15px] hover:underline text-[#FF8400]">See All</a>
     </div>
@@ -51,14 +51,15 @@
     emits: ['next', 'prev'],
     props: {
       title: {
-        required: true,
+        default: null,
         type: String
       },
       loading: {
         type: Boolean
       },
       display: {
-        type: Number
+        type: Number,
+        required: true
       },
       available: {
         type: Object,
