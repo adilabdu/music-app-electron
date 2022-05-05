@@ -35,7 +35,6 @@
       <div class="w-full group font-light">
         <div class="flex justify-between items-start w-full">
           <h3 class="text-[10px] text-[#FFFFFFA3] font-medium ml-[1px]">Library</h3>
-<!--          <h3 class="text-[12px] text-[#FFFFFFA3] font-medium ml-[1px] group-hover:opacity-100 opacity-0">+</h3>-->
         </div>
         <ul id="libraryLinks" class="relative flex flex-col gap-[2px] text-[15px] items-start text-[#EFEFEF] w-full mb-[16px]">
           <RouterLink to="/recently-added" class="h-[32px] rounded-md w-full py-[1px] flex justify-start items-center gap-4 px-2"
@@ -83,7 +82,7 @@
 
 <script setup>
 
-  import {computed, watch, onMounted, ref, onBeforeUnmount} from "vue"
+  import {computed, watch, onMounted, ref } from "vue"
   import route from '../router/index'
 
   import logo from "../static/favicon.png"
@@ -99,14 +98,17 @@
 
   const userPlaylists = ref(null)
   onMounted(() => {
-    userPlaylists.value = window.api.getNames()
+    userPlaylists.value = window.api.Playlist.all()
   })
 
   const active = computed(() => route.currentRoute.value.path)
 
   function createPlaylist() {
-    window.api.setName('ORANGE 🍊')
-    userPlaylists.value = window.api.getNames()
+    window.api.Playlist.create({
+      name: "ORANGE 🍊",
+      description: "Test Playlists are always orange!"
+    })
+    userPlaylists.value = window.api.Playlist.all()
   }
 
 </script>
