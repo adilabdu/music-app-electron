@@ -42,7 +42,15 @@ const findArtist = (id) => {
 }
 
 const allPlaylists = () => {
-  return require('../main/models/playlists').Playlist.all()
+  return require('../main/models/playlists').Playlist.all().get()
+}
+
+const allAlbums = () => {
+  return require('../main/models/albums').Album.all().withArtists().get()
+}
+
+const tracklist = (id) => {
+  return require('../main/models/albums').Album.find(id).tracks().withAlbum().get()
 }
 
 const setGenres = (album_id, genre_ids) => {
@@ -69,11 +77,13 @@ contextBridge.exposeInMainWorld('api', {
     create: createAlbum,
     find: findAlbum,
     setGenres: setGenres,
-    genres: getGenres
+    genres: getGenres,
+    all: allAlbums
   },
   Track: {
     create: createTrack,
-    find: findTrack
+    find: findTrack,
+    tracklist: tracklist
   },
   Playlist: {
     create: createPlaylist,

@@ -1,6 +1,5 @@
 import { Model } from './models'
 import {database} from "../database/manager";
-
 export class Album extends Model {
 
     static table = 'albums'
@@ -8,6 +7,39 @@ export class Album extends Model {
     constructor(id) {
         super()
         this.id = id
+    }
+
+    static withArtists() {
+
+        const Artist = require('../models/artists').Artist
+        this['_result'] = this['_result'].map(album => {
+            return {
+                id: album.id,
+                title: album.title,
+                artwork: album.artwork,
+                duration: album.duration,
+                artist_id: album.artist_id,
+                artist: Artist.find(album['artist_id']).get()
+            }
+        })
+        return this
+    }
+
+    static tracks() {
+
+        const Track = require('../models/tracks').Track
+        const query = `SELECT tracks.* FROM albums INNER JOIN tracks ON albums.id = tracks.album_id WHERE albums.id = ${this.id};`
+
+        try {
+            Track['_result'] = database.prepare(query).all()
+            console.log("SELECT Success:", query)
+            return Track
+        } catch (e) {
+            console.log("Error during SELECT:", e)
+        }
+
+        return Track
+
     }
 
     genres() {

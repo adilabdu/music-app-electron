@@ -3,6 +3,8 @@ import { database } from "../database/manager";
 export class Model {
 
     static table = ''
+    _result = null
+    id = null
 
     static create(object) {
 
@@ -22,31 +24,36 @@ export class Model {
         const query = `SELECT * FROM ${this.table}`
 
         try {
-            const result = database.prepare(query).all()
+            this['_result'] = database.prepare(query).all()
             console.log("SELECT Success:", query)
-            return result
+            return this
         } catch (e) {
             console.log("Error during SELECT:", e)
         }
 
-        return 0
+        return this
 
     }
 
     static find(id) {
 
+        this.id = id
         const query = `SELECT * FROM ${this.table} where ${this.table}.id = ${id}`
 
         try {
-            const result = database.prepare(query).all()
+            this['_result'] = database.prepare(query).all()[0]
             console.log("SELECT Success:", query)
-            return result[0]
+            return this
         } catch (e) {
             console.log("Error during SELECT:", e)
         }
 
-        return 0
+        return this
 
+    }
+
+    static get() {
+        return this['_result']
     }
 
     static _JSONParser(object) {
