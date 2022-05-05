@@ -1,26 +1,85 @@
 import { contextBridge, ipcRenderer } from 'electron';
+
+const manager = require('./database/manager')
+
 const { readDirectory, readFile } = require('./fs/disk');
 const { parseAudio } = require('./metadata/index')
-
-const playlist = require('./database/models/playlist.model')
-const manager = require('./database/manager')
 
 const initDB = () => {
   return manager.initialize()
 }
 
-const getNames = () => {
-  return playlist.getNames()
+const createArtist = (object) => {
+  return require('../main/models/artists').Artist.create(object)
 }
 
-const setName = (title, description) => {
-  return playlist.setNames(title, description)
+const createAlbum = (object) => {
+  return require('../main/models/albums').Album.create(object)
+}
+
+const createPlaylist = (object) => {
+  return require('../main/models/playlists').Playlist.create(object)
+}
+
+const createTrack = (object) => {
+  return require('../main/models/tracks').Track.create(object)
+}
+
+const findPlaylist = (id) => {
+  return require('../main/models/playlists').Playlist.find(id)
+}
+
+const findAlbum = (id) => {
+  return require('../main/models/albums').Album.find(id)
+}
+
+const findTrack = (id) => {
+  return require('../main/models/tracks').Track.find(id)
+}
+
+const findArtist = (id) => {
+  return require('../main/models/artists').Artist.find(id)
+}
+
+const allPlaylists = () => {
+  return require('../main/models/playlists').Playlist.all()
+}
+
+const setGenres = (album_id, genre_ids) => {
+
+  const Album = require('../main/models/albums').Album
+  new Album(album_id).attachGenres(genre_ids)
+
+}
+
+const getGenres = (album_id) => {
+
+  const Album = require('../main/models/albums').Album
+  return new Album(album_id).genres()
+
 }
 
 contextBridge.exposeInMainWorld('api', {
   initDB: initDB,
-  getNames: getNames,
-  setName: setName
+  Artist: {
+    create: createArtist,
+    find: findArtist
+  },
+  Album: {
+    create: createAlbum,
+    find: findAlbum,
+    setGenres: setGenres,
+    genres: getGenres
+  },
+  Track: {
+    create: createTrack,
+    find: findTrack
+  },
+  Playlist: {
+    create: createPlaylist,
+    find: findPlaylist,
+    all: allPlaylists
+  }
 })
 
 contextBridge.exposeInMainWorld('electron', {
