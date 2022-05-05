@@ -4,6 +4,12 @@ import Home from '../pages/index.vue'
 import Listen from '../pages/listen.vue'
 import Browse from '../pages/browse.vue'
 
+import AlbumLayout from '../pages/albums/index.vue'
+import Albums from '../pages/albums/all.vue'
+import Album from '../pages/albums/single.vue'
+
+import Tracklist from '../views/Tracklist.vue'
+
 const routes = [
     {
         path: '/',
@@ -37,8 +43,20 @@ const routes = [
     },
     {
         path: '/albums',
-        name: 'Albums',
-        component: Browse,
+        name: 'AlbumLayout',
+        component: AlbumLayout,
+        children: [
+            {
+                path: '',
+                name: 'Albums',
+                component: Albums
+            },
+            {
+                path: ':id',
+                name: 'Album',
+                component: Album
+            }
+        ]
     },
     {
         path: '/songs',
