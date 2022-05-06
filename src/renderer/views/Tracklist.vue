@@ -43,101 +43,51 @@
 
     </div>
 
-    <div class="flex w-full min-h-[36px] px-[40px] my-[40px]">
+    <div class="tracklist-table flex flex-col w-full min-h-[36px] px-[40px] my-[40px]">
 
-      <table class="w-full">
-        <tr>
-          <td class="left-cell number-cell">1</td>
-          <td class="text-cell title-cell">Black Panther</td>
-          <td class="text-cell subtitle-cell">Kendrick Lamar</td>
-          <td class="time-cell">2:10</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">2</td>
-          <td class="text-cell title-cell">All the Stars</td>
-          <td class="text-cell subtitle-cell"></td>
-          <td class="time-cell">3:11</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">3</td>
-          <td class="text-cell title-cell">X</td>
-          <td class="text-cell subtitle-cell">ScHoolboy Q, 2 Chainz, Saudi, Kendrick Lamar</td>
-          <td class="time-cell">4:01</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">4</td>
-          <td class="text-cell title-cell">The Ways</td>
-          <td class="text-cell subtitle-cell">Khalid and Swae Lee</td>
-          <td class="time-cell">3:10</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">5</td>
-          <td class="text-cell title-cell">Opps</td>
-          <td class="text-cell subtitle-cell">Vince Staples Yugen Blakrok</td>
-          <td class="time-cell">3:22</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">6</td>
-          <td class="text-cell title-cell">I Am</td>
-          <td class="text-cell subtitle-cell">Jorja Smith</td>
-          <td class="time-cell">3:48</td>
-          <td class="right-cell">
-            <button class="flex gap-0.5 items-center justify-center">
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
-          </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-cell number-cell">7</td>
-          <td class="text-cell title-cell">Paramedic!</td>
-          <td class="text-cell subtitle-cell">SOB X RBE</td>
-          <td class="time-cell">3:49</td>
-          <td class="right-cell">
+      <div class="group hover:!bg-[#353535] track w-full rounded-md flex items-center pl-[7px] pr-[18px] text-[13px] font-light h-[46px]">
+
+        <div class="relative flex items-center">
+          <PlayIcon class="absolute ml-2 group-hover:opacity-100 opacity-0" :width="12" :class="'fill-[#FF8400]'" />
+          <p class="max-w-fit pl-2 pr-6 text-center group-hover:opacity-0 opacity-100">1</p>
+        </div>
+        <p class="w-1/2">X</p>
+        <p class="grow truncate">ScHoolboy Q, 2 Chainz, Saudi, Kendrick Lamar</p>
+        <div class="w-[42px] flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <PlusIcon :width="16" :class="'fill-white'" />
+        </div>
+        <p class="max-w-fit text-right pr-1">4:01</p>
+        <div class="w-[28px] flex items-center justify-center">
           <button class="flex gap-0.5 items-center justify-center">
             <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
             <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
             <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
           </button>
-          </td>
-        </tr>
-      </table>
+        </div>
+
+      </div>
+
+      <div class="group hover:!bg-[#353535] track w-full rounded-md flex items-center pl-[7px] pr-[18px] text-[13px] font-light h-[46px]">
+
+        <div class="relative flex items-center">
+          <PlayIcon class="absolute ml-2 group-hover:opacity-100 opacity-0" :width="12" :class="'fill-[#FF8400]'" />
+          <p class="max-w-fit pl-2 pr-6 text-center group-hover:opacity-0 opacity-100">1</p>
+        </div>
+        <p class="w-1/2">Opps</p>
+        <p class="grow truncate">Vince Staples, Yugen Blakrok</p>
+        <div class="w-[42px] flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <PlusIcon :width="16" :class="'fill-white'" />
+        </div>
+        <p class="max-w-fit text-right pr-1">22:51</p>
+        <div class="w-[28px] flex items-center justify-center">
+          <button class="flex gap-0.5 items-center justify-center">
+            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
+            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
+            <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400]" />
+          </button>
+        </div>
+
+      </div>
 
     </div>
 
@@ -148,7 +98,8 @@
 <script setup>
 
   import ContentPage from "../components/ContentPage.vue";
-  import PlayIcon from "../components/Icons/play.vue"
+  import PlayIcon from "../components/Icons/play.vue";
+  import PlusIcon from "../components/Icons/plus.vue";
 
   const props = defineProps({
     album: {
@@ -161,40 +112,8 @@
 
 <style scoped>
 
-  td {
-    @apply text-[13px] font-light h-[46px] flex items-center justify-center;
-  }
-
-  .number-cell {
-    @apply text-center;
-  }
-
-  .time-cell {
-    @apply col-span-1 flex justify-end;
-  }
-
-  .title-cell {
-    @apply col-span-5 flex justify-start;
-  }
-
-  .subtitle-cell {
-    @apply col-span-4 flex justify-start;
-  }
-
-  tr {
-    @apply grid grid-cols-12;
-  }
-
-  tr:nth-child(odd) {
+  .tracklist-table .track:nth-child(odd) {
     @apply bg-[#252525];
-  }
-
-  .left-cell {
-    @apply rounded-md  col-span-1;
-  }
-
-  .right-cell {
-    @apply rounded-r-md col-span-1;
   }
 
 </style>
