@@ -4,7 +4,7 @@
 
     <AlbumCarousel :display="24" :loading="loading">
 
-      <AlbumCard v-for="album in albums" :album-info="{ id: album.id, title: album.title, artist: album.artist.name, artwork: album.artwork, tracks: null, }"  />
+      <AlbumCard v-for="album in albums" :album-info="{ id: album.id, title: album.title, artist: album.artist.name, artwork: album.artwork, tracklist: tracklist(album.id), }"  />
 
     </AlbumCarousel>
 
@@ -27,10 +27,16 @@
 
     albums.value = window.api.Album.all()
     loading.value = false
-    console.log("All albums:", albums.value)
-    console.log("Tracklist:", window.api.Track.tracklist(2))
 
   })
+
+  // TODO: make async
+  const tracklist = (id) => {
+    loading.value = true
+    const result = window.api.Track.tracklist(id)
+    loading.value = false
+    return result
+  }
 
 
 </script>
