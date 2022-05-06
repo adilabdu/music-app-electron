@@ -33,7 +33,7 @@
 
 <script>
 
-  import { onMounted, computed } from "vue"
+  import { computed, ref } from "vue"
 
   import store from "../store"
   import router from "../router"
@@ -59,14 +59,18 @@
       const loadedTrack = computed(() => store.state.player.currentTrack.track)
 
       function startPlaying() {
+        inPlace.value = true
         store.dispatch('loadTrack', props.albumInfo)
         store.dispatch('play')
       }
 
       function pausePlaying() {
+        inPlace.value = true
         store.dispatch('pause')
       }
 
+      // TODO: instead of `inPlace`, find CSS method to avoid route navigation
+      const inPlace = ref(false)
       function playMe() {
         return !playing.value || (playing.value && (loadedTrack.value !== props.albumInfo.track))
       }
@@ -78,7 +82,12 @@
       function goToTracklist() {
 
         store.dispatch('setCurrentAlbum', props.albumInfo)
-        router.push({ path: `/albums/${props.albumInfo.id}` })
+        console.log("After AlbumCard is clicked, currentAlbum state holds:", store.state.album.currentAlbum)
+        console.log("inPlace value is:", inPlace.value)
+        if(inPlace.value === false) {
+          router.push({ path: `/albums/${props.albumInfo.id}` })
+        }
+        inPlace.value = false
 
       }
 
