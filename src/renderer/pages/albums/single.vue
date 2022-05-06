@@ -6,11 +6,15 @@
 
 <script setup>
 
-  import { computed } from "vue"
+  import { computed, onBeforeUnmount } from "vue"
   import store from "../../store/index"
   import Tracklist from "../../views/Tracklist.vue";
 
   const album = computed(() => store.state.album.currentAlbum)
+
+  onBeforeUnmount(() => {
+    store.dispatch('setCurrentAlbum', null)
+  })
 
 </script>
 
