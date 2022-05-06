@@ -1,6 +1,6 @@
 <template>
 
-  <main class="min-h-screen grow w-full text-white max-w-[1600px]" style="margin: 40px 0 0 0;">
+  <main class="grow w-full text-white max-w-[1600px]" style="margin: 40px 0 0 0;">
 
     <h1 v-if="!! pageTitle" class="text-[34px] text-[#EFEFEF] font-semibold capitalize mb-[6px] px-[40px]">{{ pageTitle }}</h1>
     <div v-if="!! pageTitle" class="px-[40px]">
