@@ -50,7 +50,7 @@ const allAlbums = () => {
 }
 
 const tracklist = (id) => {
-  return require('../main/models/albums').Album.find(id).tracks().withAlbum().get()
+  return require('../main/models/albums').Album.find(id).tracks().get()
 }
 
 const setGenres = (album_id, genre_ids) => {
