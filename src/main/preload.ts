@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 const manager = require('./database/manager')
 
-const { readDirectory, readFile } = require('./fs/disk');
+const { readDirectory, readFile } = require('./fs/manager');
 const { parseAudio } = require('./metadata/index')
 
 const initDB = () => {
