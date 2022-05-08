@@ -13,15 +13,16 @@
 
     <div id="track" class="h-full w-full flex items-center justify-center mx-[5px] lg:mx-0">
       <div id="trackArtwork" class="relative rounded-l-sm h-[44px] w-[44px] bg-[#323232] border-y border-l border-[#4D4D4D] flex items-center justify-center">
-        <div class="group opacity-0 hover:opacity-100 absolute w-full h-full rounded-l-sm flex items-center justify-center bg-black bg-opacity-25 cursor-pointerx">
+        <div class="group opacity-0 hover:opacity-100 absolute w-full h-full rounded-l-sm flex items-center justify-center bg-black bg-opacity-25 cursor-pointer">
           <MinimizeIcon @click="openMiniPlayer" :class="'fill-[#FFFFFFEB] group-hover:opacity-100 opacity-0'" :width="18" :stroke="{color: '#FFFFFFEB', width: 12 }" />
         </div>
         <img v-if="track.artwork" :src="track.artwork" alt="Now playing" class="w-full object-cover rounded-l-sm">
         <TrackIcon v-else :width="16" :class="'fill-[#5F5F5F]'" />
       </div>
-      <div id="trackInfo" class="group custom-group relative flex flex-col items-center rounded-r-sm h-[44px] max-w-full lg:max-w-[628px] grow bg-[#4D4D4D]" :style="{ width: (width * 0.35) + 'px' }">
+      <div id="trackInfo" class="group custom-group relative flex flex-col items-center rounded-r-sm h-[44px] max-w-full lg:max-w-[628px] border-2 border-red-900 grow bg-[#4D4D4D]"
+           :style="{ width: (width * 0.35) + 'px' }">
 
-        <MediaPlayer ref="playerRef" :source="track.track" :autoplay="true" class="w-full" :key="playerKey" :play="playing" />
+        <MediaPlayer ref="playerRef" :source="track.location" :autoplay="true" class="w-full" :key="playerKey" :play="playing" />
 
         <div v-if="!store.state.player.emptyTrack" class="w-full flex flex-col items-center justify-center gap-1 mt-[4px]">
           <div id="trackTitle" class="flex items-center text-[13px] text-[#FFFFFFEB] leading-none font-light">
