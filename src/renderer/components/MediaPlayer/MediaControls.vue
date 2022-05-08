@@ -19,7 +19,7 @@
         <img v-if="track.artwork" :src="track.artwork" alt="Now playing" class="w-full object-cover rounded-l-sm">
         <TrackIcon v-else :width="16" :class="'fill-[#5F5F5F]'" />
       </div>
-      <div id="trackInfo" class="group custom-group relative flex flex-col items-center rounded-r-sm h-[44px] max-w-full lg:max-w-[628px] border-2 border-red-900 grow bg-[#4D4D4D]"
+      <div id="trackInfo" class="group custom-group relative flex flex-col items-center rounded-r-sm h-[44px] max-w-full lg:max-w-[628px] grow bg-[#4D4D4D]"
            :style="{ width: (width * 0.35) + 'px' }">
 
         <MediaPlayer ref="playerRef" :source="track.location" :autoplay="true" class="w-full" :key="playerKey" :play="playing" />
