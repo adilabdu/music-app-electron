@@ -41,6 +41,12 @@
 
   onMounted(() => {
     playing.value = true
+
+    audio.value.onerror = () => {
+      console.log("Error detected")
+      store.dispatch('unloadTrack')
+    }
+
   })
 
   watch([currentTime, duration, volume], () => {
