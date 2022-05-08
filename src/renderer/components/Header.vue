@@ -1,6 +1,6 @@
 <template>
 
-  <header class="bottom-0 sm:top-0 fixed z-50 h-[55px] bg-[#2C2C2C] flex justify-center sm:border-b-[0.25px] border-[#404040]" :style="{ width: width + 'px' }">
+  <header class="bottom-0 sm:top-0 fixed z-50 h-[55px] bg-[#2C2C2C] flex justify-center sm:border-b-[0.25px] border-[#404040] w-full md:w-[calc(100%-256px)]">
     <MediaPlayer :width="width" />
   </header>
 
