@@ -59,7 +59,7 @@
       },
       display: {
         type: Number,
-        required: true
+        default: 6
       },
       available: {
         type: Object,
