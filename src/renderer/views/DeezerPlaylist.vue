@@ -1,7 +1,8 @@
 <template>
 
   <AlbumCarousel @previous="fetchPrevious" @next="fetchNext" :display="display" :loading="loading" :title="title" :available="{ next: !! next, prev: !! prev }">
-    <AlbumCard v-if="loading === false" v-for="i in display" :key="i" :album-info="{ artwork: tracks[i-1].artwork, artist: tracks[i-1].artist, title: tracks[i-1].title, track: tracks[i-1].track, album: tracks[i-1].album }" />
+    <AlbumCard :show-album-title="false" v-if="loading === false" v-for="i in display" :key="i"
+               :album-info="albumInfo(tracks[i-1])" />
   </AlbumCarousel>
 
 </template>
@@ -10,8 +11,10 @@
 
   import axios from "axios";
 
-  import { ref, onMounted, onBeforeMount, computed, watch } from "vue";
+  import { ref, onMounted, watch } from "vue";
   import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+
+  import router from "../router/index"
 
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
@@ -70,17 +73,29 @@
       prev.value = response.data['prev'] ? response.data['prev'] : null
       tracks.value = response.data.data.map(track => {
         return {
-          title: track.title,
-          album: track.album.title,
+          title: track.album.title,
           artist: track.artist.name,
           artwork: track.album['cover_medium'] ? track.album['cover_medium'] : '',
-          track: track.preview
+          tracklist: [
+            {
+              title: track.title,
+              location: track.preview,
+              duration: track.duration
+            }
+          ]
         }
       })
       console.log('tracks is', tracks.value[0].artwork)
-    }).catch(err => console.error(err)).finally(() => {
+    }).catch((err) => {
+      router.push({ path: '/albums' })
+      console.error(err)
+    }).finally(() => {
       loading.value = false
     })
+  }
+
+  function albumInfo(track) {
+    return track
   }
 
 </script>
