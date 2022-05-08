@@ -2,8 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 const manager = require('./database/manager')
 
-const { readDirectory, readFile } = require('./fs/manager');
-const { parseAudio } = require('./metadata/index')
+const { readLibrary } = require('./controllers/library')
 
 const initDB = () => {
   return manager.initialize()
@@ -97,7 +96,5 @@ contextBridge.exposeInMainWorld('electron', {
 })
 
 contextBridge.exposeInMainWorld('io', {
-  readDirectory: readDirectory,
-  readFile: readFile,
-  parseAudio: parseAudio
+  readLibrary: readLibrary
 })
