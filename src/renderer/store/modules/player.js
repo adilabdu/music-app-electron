@@ -1,5 +1,3 @@
-import store from "../index";
-
 const state = {
     playing: false,
     buffered: [],
@@ -76,6 +74,7 @@ const mutations = {
 
     unloadTrack(state) {
         state.currentTrack = {}
+        state.playing = false
         state.emptyTrack = true
     },
 
