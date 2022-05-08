@@ -3,7 +3,10 @@
   <div class="flex w-full h-[270px] justify-start px-[40px] px-[40px]">
 
     <div class="w-[270px]">
-      <img alt="Album Artwork" :src="!! album.artwork ? album.artwork : ''" class="w-full aspect-square rounded-md" />
+      <img alt="Album Artwork" v-if="!! album.artwork" :src="album.artwork" class="w-full aspect-square rounded-md" />
+      <div v-else class="w-full aspect-square rounded-md bg-[#4D4D4D] bg-opacity-50 transition-colors duration-300 flex items-center justify-center">
+        <TrackIcon :width="56" :class="'fill-[#818181]'" />
+      </div>
     </div>
 
     <div class="grow flex flex-col justify-between items-start pl-[34px] py-[5px]">
@@ -46,6 +49,7 @@
 <script setup>
 
   import PlayIcon from "./Icons/play.vue";
+  import TrackIcon from "./Icons/track.vue";
 
   const props = defineProps({
     album: {

@@ -18,11 +18,14 @@
 
         </div>
       </div>
-      <img
+      <img v-if="!! albumInfo['artwork']"
           :src="albumInfo['artwork']"
           alt="cover"
           class="rounded-md w-full aspect-square object-cover"
       />
+      <div v-else class="w-full aspect-square rounded-md bg-[#4D4D4D] bg-opacity-50 transition-colors duration-300 flex items-center justify-center">
+        <TrackIcon :width="48" :class="'fill-[#818181]'" />
+      </div>
     </div>
     <div class="pt-[6px] flex flex-col">
       <a href="#" class="hover:underline cursor-pointer text-[12px] text-[#EFEFEF]">{{ showAlbumTitle ? albumInfo.title : albumInfo.tracklist[0].title }}</a>
@@ -41,11 +44,13 @@
 
   import PlayIcon from "./Icons/play.vue"
   import PauseIcon from "./Icons/pause.vue"
+  import TrackIcon from "./Icons/track.vue"
 
   export default {
     name: "AlbumCard",
     components: {
       PlayIcon,
+      TrackIcon,
       PauseIcon
     },
     props: {
