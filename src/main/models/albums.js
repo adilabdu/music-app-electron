@@ -59,7 +59,7 @@ export class Album extends Model {
 
     }
 
-    attachGenres(ids) {
+    static attachGenres(ids) {
 
         ids.forEach(id => {
 
