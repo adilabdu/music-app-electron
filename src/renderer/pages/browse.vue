@@ -10,34 +10,6 @@
 
     </AlbumCarousel>
 
-<!--    <AlbumCarousel title="Recently Played">-->
-<!--      <AlbumCard :show-album-title="false" :album-info="albumInfo(tracks[i-1])" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'static/artworks/Fleetwood-Mac-Rumours-1-1.webp', artist: 'Fleetwood Mac', title: 'Rumors' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'static/artworks/Kendrick-Lamar-To-Pimp-a-Butterfly.webp', artist: 'Kendrick Lamar', title: 'To Pimp a Butterfly' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'static/artworks/Taylor-Swift-1989.webp', artist: 'Taylor Swift', title: '1989' }" />-->
-<!--      <AlbumCard class="" :album-info="{ artwork: 'static/artworks/Kanye-West-Yeezus.webp', artist: 'Kanye West', title: 'Yeezus' }" />-->
-<!--      <AlbumCard class="xl:inline lg:hidden" :album-info="{ artwork: 'static/artworks/The-Beatles-Abbey-Road-Album-cover-web-optimised-820.webp', artist: 'The Beatles', title: 'Abbey Road' }" />-->
-<!--      <AlbumCard class="2xl:inline lg:hidden" :album-info="{ artwork: 'static/artworks/Parliament-Mothership-Connection-album.webp', artist: 'Parliament', title: 'Mothership Connection' }" />-->
-<!--    </AlbumCarousel>-->
-
-<!--    <AlbumCarousel title="Favorites">-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2022/03/4.-The-Notorious-B.I.G.-%E2%80%98Ready-to-Die-1994-album-art-billboard-1240.jpg?w=1065', artist: 'The Notorious B.I.G.', title: 'Ready to Die' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/cardi-b-invasion-of-privacy-album-art-2018-billboard-embed.jpg?w=1024', artist: 'Cardi B', title: 'Invasion of Privacy' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2022/03/42.-Nicki-Minaj-%E2%80%98The-Pinkprint-2014-album-art-billboard-1240.jpg?w=1024', artist: 'Nicki Minaj', title: 'The Pinkprint' }" />-->
-<!--      <AlbumCard class="" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2022/03/40.-Beyonce-%E2%80%98Beyonce-2013-album-art-billboard-1240.jpg?w=1024', artist: 'Beyonce', title: 'Beyonce' }" />-->
-<!--      <AlbumCard class="xl:inline lg:hidden" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2020/12/tame-impala-the-slow-rush-cover-billboard-1240-1607121696.jpg', artist: 'Tame Impala', title: 'The Slow Rush' }" />-->
-<!--      <AlbumCard class="2xl:inline lg:hidden" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/ariana-grande-sweetner-album-art-2018-billboard-1240.jpg?w=1024', artist: 'Ariana Grande', title: 'The Sweetener' }" />-->
-<!--    </AlbumCarousel>-->
-
-<!--    <AlbumCarousel title="New Releases">-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Vince-Staples-Vince-Staples-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Vince Staples', title: 'Vince Staples' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/05/J-Cole-The-Off-Season-album-art-2021-billboard-1240-1622132104.jpg?w=1024', artist: 'J. Cole', title: 'The Off Season' }" />-->
-<!--      <AlbumCard :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/Taylor-Swift-Lover-album-art-2019-billboard-1240.jpg?w=1024', artist: 'Taylor Swift', title: 'Lover' }" />-->
-<!--      <AlbumCard class="" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Kanye-West-Donda-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Ye', title: 'Donda' }" />-->
-<!--      <AlbumCard class="xl:inline lg:hidden" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/2021/12/Justin-Bieber-Justice-album-art-2021-billboard-1240.jpg?w=1024', artist: 'Justin Bieber', title: 'Justice' }" />-->
-<!--      <AlbumCard class="2xl:inline lg:hidden" :album-info="{ artwork: 'https://www.billboard.com/wp-content/uploads/media/maggie-rogers-heard-it-in-a-past-life-album-art-2019-billboard-1240.jpg?w=1024', artist: 'Maggie Rogers', title: 'Heard it in a Past Life' }" />-->
-<!--    </AlbumCarousel>-->
-
   </ContentPage>
 
 </template>
@@ -51,6 +23,36 @@
   import AlbumCard from "../components/AlbumCard.vue";
   import AddLocationFunction from "../views/AddLocationFunction.vue";
 
+  const library = ref([])
+  const loading = ref(true)
+
+  // onMounted(() => {
+  //
+  //   // TODO: readDatabase() first, if no data returned do: readLibrary()
+  //
+  //   window.io.readLibrary().then((result) => {
+  //     library.value = result
+  //   }).catch((e) => {
+  //     console.log('Error while fetching local library:', e)
+  //   }).finally(loading.value = false)
+  //
+  // })
+  //
+  // function albumCardData(data) {
+  //   return {
+  //     title: data.album.title,
+  //     artist: data.artist.name,
+  //     artwork: data.album['cover_medium'] ? data.album['cover_medium'] : '',
+  //     tracklist: [
+  //       {
+  //         title: data.title,
+  //         location: data.preview,
+  //         duration: data.duration
+  //       }
+  //     ]
+  //   }
+  //
+  // }
 
 </script>
 
