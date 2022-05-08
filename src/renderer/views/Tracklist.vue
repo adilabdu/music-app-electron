@@ -31,13 +31,15 @@
           '' :
           track['contributing_artist']) : '',
       3: !!track.duration ? toMinutes(track.duration) : '',
+      4: !!track.location ? track.location : ''
     }
   }) : [
     {
       0: 1,
       1: props.album['title'],
       2: props.album['artist'],
-      3: ''
+      3: !!props.album['duration'] ? toMinutes(props.album['duration']) : '',
+      4: !!props.album['location'] ? props.album['location'] : ''
     }
   ]
 
