@@ -1,14 +1,15 @@
 const { promises: fs } = require('fs')
 const path = require('path')
+const os = require('os')
 
-const dbManager = require('../database/manager')
+const rootFolder = os.homedir() + '/Documents/music/'
 
 export const readDirectory = async () => {
 
     const fileNames = []
     const folders = []
 
-    const content = await fs.readdir(dbManager.config()['library_location'], { withFileTypes: true })
+    const content = await fs.readdir(rootFolder, { withFileTypes: true })
 
     try {
         fileNames.push(content.filter( file => path.extname(file.name) === '.mp3' || path.extname(file.name) === '.m4a' ))
@@ -71,7 +72,7 @@ export const readFile = async (fileName) => {
     const file = {}
 
     try {
-        file.buffer = await fs.readFile('/Users/adilabdu/Documents/music/' + fileName)
+        file.buffer = await fs.readFile(rootFolder + fileName)
     } catch (error) {
         console.log(error)
     }
