@@ -2,7 +2,7 @@ node_modules
 dist
 build
 
-./orange.db
+orange.db
 ./src/renderer/static/fonts/
 
 .vscode
