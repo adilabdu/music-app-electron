@@ -13,15 +13,16 @@ const { readDirectory, readFile } = require('../fs/manager');
 const fileNames = {}
 const result = []
 const rootFolder = os.homedir() + '/Documents/music/'
+const subFolders = {}
 
 // Get files from local directory and read files
-export async function readLibrary() {
+export async function readLibrary(directory) {
 
-    console.log('Albums in Library:', (await readDirectory()).folders)
-    fileNames.value = (await readDirectory()).fileNames
+    subFolders.names = (await readDirectory(directory)).folders
+    fileNames.value = (await readDirectory(directory)).fileNames
 
     for (const fileName of fileNames.value) {
-        const file = await readFile(fileName)
+        const file = await readFile(directory + fileName, false)
         const metadata = await getFileData(fileName, file)
 
         result.push({
@@ -50,9 +51,9 @@ export async function getFileData(file, buffer) {
 }
 
 // Populating the database with files from local library
-async function populateDatabase() {
+async function populateDatabase(directory= rootFolder) {
 
-    const library = await readLibrary()
+    const library = await readLibrary(directory)
 
     library.forEach(file => {
 
@@ -99,4 +100,18 @@ function imageSource(buffer) {
     return `data:image/png;base64,${toBase64}`
 }
 
-populateDatabase().then()
+// TODO: find suitable app flow to figure where and when to run this function
+// populateDatabase().then(() => {
+//     // console.log('Albums in Library:', subFolders.names)
+//     subFolders.names.forEach(folder => populateDatabase(rootFolder + `${folder}/`))
+// })
+
+// TODO: watch the local directory for delete / add event and update DB accordingly
+// const chokidar = require('chokidar');
+// chokidar.watch(rootFolder, {ignoreInitial: true})
+//     .on('ready', (event, path) => {
+//         alert(event)
+//     })
+//     .on('add', (path) => {
+//         alert(path)
+//     });
