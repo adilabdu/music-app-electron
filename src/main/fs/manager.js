@@ -67,12 +67,12 @@ export const readFilesRecursively = async (currentFolder, folders, fileNames) =>
 
 }
 
-export const readFile = async (fileName) => {
+export const readFile = async (fileName, relative=true) => {
 
     const file = {}
 
     try {
-        file.buffer = await fs.readFile(rootFolder + fileName)
+        file.buffer = await fs.readFile(relative ? rootFolder + fileName : fileName)
     } catch (error) {
         console.log(error)
     }
