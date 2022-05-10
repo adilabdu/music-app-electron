@@ -48,6 +48,10 @@ const allAlbums = () => {
   return require('../main/models/albums').Album.all().withArtists().get()
 }
 
+const paginateAlbums = (paginate, offset= 0) => {
+  return require('../main/models/albums').Album.paginate(paginate, offset).withArtists().get()
+}
+
 const tracklist = (id) => {
   return require('../main/models/albums').Album.find(id).tracks().get()
 }
@@ -77,7 +81,8 @@ contextBridge.exposeInMainWorld('api', {
     find: findAlbum,
     setGenres: setGenres,
     genres: getGenres,
-    all: allAlbums
+    all: allAlbums,
+    paginate: paginateAlbums
   },
   Track: {
     create: createTrack,
