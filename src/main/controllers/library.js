@@ -1,3 +1,5 @@
+import os from "os";
+
 const metadata = require('music-metadata');
 
 const { config } = require('../database/manager');
@@ -10,7 +12,7 @@ const { readDirectory, readFile } = require('../fs/manager');
 
 const fileNames = {}
 const result = []
-const rootFolder = config()['library_location']
+const rootFolder = os.homedir() + '/Documents/music/'
 
 // Get files from local directory and read files
 export async function readLibrary() {
@@ -25,7 +27,7 @@ export async function readLibrary() {
         result.push({
             album: {
                 title: metadata.common.album,
-                artwork: metadata.common.picture[0].data,
+                artwork: imageSource(metadata.common.picture[0].data),
             },
             artist: {
                 name: !! metadata.common.albumartist ? metadata.common.albumartist : metadata.common.artist,
@@ -43,7 +45,7 @@ export async function readLibrary() {
 }
 
 // Get the metadata of a single file
-async function getFileData(file, buffer) {
+export async function getFileData(file, buffer) {
     return await metadata.parseBuffer(buffer.buffer)
 }
 
@@ -62,7 +64,7 @@ async function populateDatabase() {
             Artist.create({ name: file.artist.name })
 
         const album = Album.where({ title: file.album.title, artist_id: artist.id }).first() ??
-            Album.create({ title: file.album.title, artist_id: artist.id })
+            Album.create({ title: file.album.title, artist_id: artist.id, artwork: file.album.artwork  })
 
         const genres = []
         file.genre.forEach(genre => {
@@ -86,6 +88,15 @@ async function populateDatabase() {
 
     })
 
+}
+
+// Converting picture Buffer to Base64
+function imageSource(buffer) {
+
+    const toBase64 = btoa(
+        buffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+    return `data:image/png;base64,${toBase64}`
 }
 
 populateDatabase().then()
