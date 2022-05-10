@@ -7,7 +7,7 @@
 }
 
 * {
-    @apply select-none;
+    @apply select-none focus:outline-none;
 }
 
 body {
