@@ -15,7 +15,7 @@ to collect track data and displays popular playlist with previews for each track
 
 ```bash
 npm install
-./node_modules/.bin/.electron-rebuild
+./node_modules/.bin/electron-rebuild
 ```
 
 #### Run the Development Server
