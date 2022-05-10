@@ -38,6 +38,22 @@ export class Model {
 
     }
 
+    static paginate(limit, offset = 0) {
+
+        const query = `SELECT * FROM ${this.table} ${!! this.orderBy} LIMIT ${limit} OFFSET ${offset}`
+
+        try {
+            this['_result'] = database.prepare(query).all()
+            console.log("SELECT Success:", query)
+            return this
+        } catch (e) {
+            console.log("Error during SELECT:", e)
+        }
+
+        return this
+
+    }
+
     static find(id) {
 
         this.id = id
