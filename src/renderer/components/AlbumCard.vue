@@ -29,7 +29,7 @@
     </div>
     <div class="pt-[6px] flex flex-col">
       <a href="#" class="hover:underline cursor-pointer text-[12px] text-[#EFEFEF]">{{ showAlbumTitle ? albumInfo.title : albumInfo.tracklist[0].title }}</a>
-      <a href="#" class="hover:underline cursor-pointer text-[12px] text-[#EFEFEF] opacity-75 leading-none truncate">{{ albumInfo['artist'] }}</a>
+      <a href="#" class="hover:underline cursor-pointer text-[12px] text-[#EFEFEF] opacity-75 leading-none truncate pb-[0.125rem]">{{ albumInfo['artist'] }}</a>
     </div>
   </article>
 
@@ -68,7 +68,7 @@
       const playing = computed(() => store.state.player.playing)
       const loadedTrack = computed(() => store.state.player.currentTrack.location)
 
-      // TODO: Encapsulate this function, since it's repeated multiple places
+      // TODO: Encapsulate these functions, since it's repeated multiple places
       function startPlaying() {
         inPlace.value = true
 
@@ -76,16 +76,40 @@
             (store.state.player.currentTrack.location !==  props.albumInfo.tracklist[0].location)) {
 
           store.dispatch('unloadTrack')
-          store.dispatch('loadTrack', {
-            title: props.albumInfo.tracklist[0].title,
-            artist: props.albumInfo.artist,
-            album: props.albumInfo.title,
-            location: props.albumInfo.tracklist[0].location,
-            artwork: props.albumInfo.artwork
-          })
         }
 
-        store.dispatch('play')
+        console.log('before')
+        loadTrack().then(() => store.dispatch('play'))
+        // store.dispatch('play')
+        console.log('after')
+      }
+
+      async function loadTrack() {
+
+        const local = ref(props.albumInfo.tracklist[0].local)
+        console.log('local:', local.value)
+        const payload = {
+          title: props.albumInfo.tracklist[0].title,
+          artist: props.albumInfo.artist,
+          album: props.albumInfo.title,
+          location: local.value ?
+              await bufferToBlob(props.albumInfo.tracklist[0].location) :
+              props.albumInfo.tracklist[0].location,
+          artwork: props.albumInfo.artwork
+        }
+
+        console.log("Payload of track to be loaded", payload)
+
+        await store.dispatch('loadTrack', payload)
+      }
+
+      async function bufferToBlob(buffer) {
+
+        const file = (await window.io.readFile(buffer, false)).buffer
+        console.log('Inside renderer buffer converter:', file)
+
+        const blob = new Blob([file], { type: "audio/mp3" });
+        return window.URL.createObjectURL(blob);
       }
 
       function pausePlaying() {
