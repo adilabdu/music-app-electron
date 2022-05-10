@@ -1,15 +1,14 @@
 const { promises: fs } = require('fs')
 const path = require('path')
 const os = require('os')
-
 const rootFolder = os.homedir() + '/Documents/music/'
 
-export const readDirectory = async () => {
+export const readDirectory = async (folder) => {
 
     const fileNames = []
     const folders = []
 
-    const content = await fs.readdir(rootFolder, { withFileTypes: true })
+    const content = await fs.readdir(folder, { withFileTypes: true })
 
     try {
         fileNames.push(content.filter( file => path.extname(file.name) === '.mp3' || path.extname(file.name) === '.m4a' ))
