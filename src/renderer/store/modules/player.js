@@ -75,6 +75,7 @@ const mutations = {
     unloadTrack(state) {
         state.currentTrack = {}
         state.playing = false
+        state.currentTime = 0
         state.emptyTrack = true
     },
 
