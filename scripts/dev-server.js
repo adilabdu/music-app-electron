@@ -68,10 +68,6 @@ async function start() {
     rendererPort = devServer.config.server.port;
 
     startElectron();
-
-    Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
-        restartElectron();
-    })
 }
 
 start();
