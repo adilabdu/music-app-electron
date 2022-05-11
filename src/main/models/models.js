@@ -71,6 +71,12 @@ export class Model {
 
     }
 
+    /* Static function to set up id value for operation on chained functions*/
+    static from(id) {
+        this.id = id
+        return this
+    }
+
     static where(constraint) {
 
         const values = Object.values(constraint)
