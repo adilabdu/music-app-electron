@@ -30,6 +30,8 @@
     }
   })
 
+  const emit = defineEmits(['loading'])
+
   const breakpoints = useBreakpoints(breakpointsTailwind)
   const sm = breakpoints.smaller('sm')
   const md = breakpoints.between('sm', 'md')
@@ -50,7 +52,7 @@
   const loading = ref(true)
 
   onMounted(() => {
-    fetch('https://cors-adil.herokuapp.com/https://api.deezer.com/playlist/' + props.playlistID + '/tracks?limit=' + display.value)
+    fetch('https://cors-adil.herokuapp.com/https://api.deezer.com/playlist/' + props.playlistID + '/tracks?limit=' + display.value, true)
   })
 
   function fetchPrevious() {
@@ -61,8 +63,11 @@
     fetch('https://cors-adil.herokuapp.com/' + next.value)
   }
 
-  function fetch(url) {
+  function fetch(url, emits=false) {
+
+    emits ? emit('loading', true) : ''
     loading.value = true
+
     axios.get(url, {
       headers: {
         'Access-Control-Allow-Origin': '*'
@@ -90,7 +95,10 @@
       router.push({ path: '/albums' })
       console.error(err)
     }).finally(() => {
+
       loading.value = false
+      emits ? emit('loading', false) : ''
+
     })
   }
 
