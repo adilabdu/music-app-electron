@@ -1,10 +1,10 @@
 <template>
 
-  <ContentPage>
+  <ContentPage :loading="loading">
 
     <AlbumCarousel :display="24" :loading="loading">
 
-      <AlbumCard v-for="album in albums" :album-info="{ id: album['id'], title: album['title'], artist: album['artist'].name, artwork: album['artwork'], tracklist: tracklist(album['id']), }"  />
+      <AlbumCard v-for="album in albums" :album-info="{ id: album['id'], title: album['title'], artist: album['artist'].name, artwork: album['artwork'], tracklist: tracklist(album['id']) }"  />
 
     </AlbumCarousel>
 
@@ -25,7 +25,7 @@
 
   onMounted(() => {
 
-    albums.value = window.api.Album.paginate(36)
+    albums.value = window.api.Album.all()
     loading.value = false
 
   })
