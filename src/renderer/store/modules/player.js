@@ -6,6 +6,7 @@ const state = {
     volume: 0.5,
     muted: false,
     currentTrack: {},
+    queuedTracks: [],
     emptyTrack: true
 }
 
@@ -23,6 +24,14 @@ const actions = {
         context.commit('currentTime', payload)
     },
 
+    replay(context) {
+        context.commit('replay')
+    },
+
+    forward(context) {
+        context.commit('forward')
+    },
+
     volume(context, payload) {
         context.commit('volume', payload)
     },
@@ -33,6 +42,14 @@ const actions = {
 
     loadTrack(context, payload) {
         context.commit('loadTrack', payload)
+    },
+
+    populateQueue(context, payload) {
+        context.commit('populateQueue', payload)
+    },
+
+    shiftQueue(context) {
+        context.commit('shiftQueue')
     },
 
     unloadTrack(context) {
@@ -59,6 +76,14 @@ const mutations = {
         state.currentTime = payload
     },
 
+    replay(state) {
+        state.currentTime = 0
+    },
+
+    forward(state) {
+        state.currentTime = state.duration
+    },
+
     volume(state, payload) {
         state.volume = payload
     },
@@ -70,6 +95,14 @@ const mutations = {
     loadTrack(state, payload) {
         state.currentTrack = payload
         state.emptyTrack = false
+    },
+
+    populateQueue(state, payload) {
+        state.queuedTracks.unshift(...payload)
+    },
+
+    shiftQueue(state) {
+        state.queuedTracks.shift()
     },
 
     unloadTrack(state) {
