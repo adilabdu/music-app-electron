@@ -7,7 +7,14 @@
       <hr class="border-[#3B3B3B] border-t-[1px]">
     </div>
 
-    <slot />
+    <div v-if="loading" class="justify-center items-center flex w-full"
+         :class="!! pageTitle ? 'h-[calc(100vh-(55px+40px+40px+51px))]' : 'h-[calc(100vh-(55px+40px+40px))]'">
+      <LoadingIcon :width="40" :class="'fill-[#818181] animate-[spin_2s_linear_infinite]'" />
+    </div>
+
+    <div :class="loading ? 'hidden' : ''">
+      <slot />
+    </div>
 
     <!-- Fixes the issue of overflow-auto on flex items-->
     <div class="w-full border-2 border-[rgba(0,0,0,0)]" />
@@ -18,12 +25,21 @@
 
 <script>
 
+  import LoadingIcon from "./Icons/loading.vue"
+
   export default {
 
     name: "ContentPage",
+    components: {
+      LoadingIcon
+    },
     props: {
       pageTitle: {
         type: String
+      },
+      loading: {
+        type: Boolean,
+        default: false
       }
     },
     setup() {
