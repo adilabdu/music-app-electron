@@ -37,7 +37,7 @@ export async function readLibrary(directory) {
             title: metadata.common.title,
             contributing_artist: metadata.common.artist,
             duration: Math.round(metadata.format.duration),
-            location: rootFolder + fileName,
+            location: directory + fileName,
             track_position: !! metadata.common.track.no ? metadata.common.track.no : 1,
         })
     }
