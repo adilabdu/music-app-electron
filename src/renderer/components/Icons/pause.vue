@@ -1,6 +1,6 @@
 <template>
 
-  <svg :class="styles" :width="width" :height="height" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+  <svg class="cursor-pointer" :class="styles" :width="width" :height="height" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
     <rect width="25" height="80" rx="5"/>
     <rect x="35" width="25" height="80" rx="5"/>
   </svg>
