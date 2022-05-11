@@ -66,7 +66,7 @@ const setGenres = (album_id, genre_ids) => {
 const getGenres = (album_id) => {
 
   const Album = require('../main/models/albums').Album
-  return new Album(album_id).genres()
+  return Album.from(album_id).genres().get()
 
 }
 
