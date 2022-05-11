@@ -14,6 +14,8 @@
         <router-view />
       </div>
 
+      <QueueList />
+
       <footer class="w-full">
       </footer>
 
@@ -25,9 +27,9 @@
 
 <script setup>
 
-import Navigation from "../components/Navigation.vue";
-import Header from "../components/Header.vue";
-import ContentPage from "../components/ContentPage.vue";
+  import Navigation from "../components/Navigation.vue";
+  import Header from "../components/Header.vue";
+  import QueueList from "../views/QueueList.vue";
 
 </script>
 
