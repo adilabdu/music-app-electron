@@ -78,10 +78,27 @@
           store.dispatch('unloadTrack')
         }
 
-        console.log('before')
         loadTrack().then(() => store.dispatch('play'))
-        // store.dispatch('play')
-        console.log('after')
+
+        const queueableTracks = props.albumInfo.tracklist.map(track => {
+          return {
+            title: track.title,
+            artist: props.albumInfo.artist,
+            album: props.albumInfo.title,
+            location: track.location,
+            artwork: props.albumInfo.artwork,
+            local: track.local,
+            duration: toMinutes(track.duration)
+          }
+        })
+
+        store.dispatch('populateQueue', queueableTracks).then(() => {
+          console.log('QueuedTracks:', store.state.player.queuedTracks)
+        })
+      }
+
+      function toMinutes(number) {
+        return `${Math.floor(number / 60)}:${(number % 60) > 9 ? (number % 60) : '0' + (number % 60)}`
       }
 
       async function loadTrack() {
@@ -92,24 +109,14 @@
           title: props.albumInfo.tracklist[0].title,
           artist: props.albumInfo.artist,
           album: props.albumInfo.title,
-          location: local.value ?
-              await bufferToBlob(props.albumInfo.tracklist[0].location) :
-              props.albumInfo.tracklist[0].location,
-          artwork: props.albumInfo.artwork
+          location: props.albumInfo.tracklist[0].location,
+          artwork: props.albumInfo.artwork,
+          local: props.albumInfo.tracklist[0].local
         }
 
         console.log("Payload of track to be loaded", payload)
 
         await store.dispatch('loadTrack', payload)
-      }
-
-      async function bufferToBlob(buffer) {
-
-        const file = (await window.io.readFile(buffer, false)).buffer
-        console.log('Inside renderer buffer converter:', file)
-
-        const blob = new Blob([file], { type: "audio/mp3" });
-        return window.URL.createObjectURL(blob);
       }
 
       function pausePlaying() {
@@ -124,6 +131,7 @@
       }
 
       function pauseMe() {
+        console.log('pauseMe() returns: ', loadedTrack.value, props.albumInfo.tracklist[0].location)
         return playing.value && (loadedTrack.value === props.albumInfo.tracklist[0].location)
       }
       
