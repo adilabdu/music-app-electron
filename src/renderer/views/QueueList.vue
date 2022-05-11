@@ -16,7 +16,7 @@
 
 <script setup>
 
-  import { onMounted, computed } from "vue";
+  import { computed } from "vue";
   import store from "../store/index"
 
   import TrackSmallCard from "../components/TrackSmallCard.vue";
