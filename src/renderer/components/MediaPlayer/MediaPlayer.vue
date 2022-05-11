@@ -54,7 +54,19 @@
     store.dispatch('duration', duration.value)
 
     if(currentTime.value === duration.value) {
-      store.dispatch('resetPlayer')
+
+      store.dispatch('unloadTrack')
+      if (store.state.player.queuedTracks.length > 0) {
+        store.dispatch('shiftQueue').then(() => {
+          if (store.state.player.queuedTracks.length > 0) {
+            store.dispatch('loadTrack', store.state.player.queuedTracks[0]).then(() => {
+            }).then(() => store.dispatch('play'))
+          }
+        })
+      }
+      else {
+        store.dispatch('resetPlayer')
+      }
     }
 
   })
