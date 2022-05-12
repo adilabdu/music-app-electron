@@ -53,7 +53,7 @@ const paginateAlbums = (paginate, offset= 0) => {
 }
 
 const tracklist = (id) => {
-  return require('../main/models/albums').Album.find(id).tracks().get()
+  return require('../main/models/albums').Album.from(id).tracks().get()
 }
 
 const setGenres = (album_id, genre_ids) => {
