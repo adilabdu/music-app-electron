@@ -65,13 +65,13 @@
                :style=" { background: volume === 0 ? '#5F5F5F' : 'linear-gradient(to right, #B8B8B8 ' + volume + '%, #5F5F5F ' + volume + '%)' } ">
 
       </div>
-      <div id="playlistTab" class="flex gap-10 items-center justify-end">
+      <div id="playlistTab" class="flex 2xl:gap-10 gap-4 items-center justify-end mr-2">
 
-        <div>
-          <ListIcon :class="'fill-[#B8B8B8]'" :width="16" />
+        <div @click="toggleQueueList" :class="[queueListOpened ? 'bg-[#FFFFFF]' : 'bg-none']"  class="rounded-md py-1.5 px-1.5 transition duration-300">
+          <ListIcon class="transition duration-300" :class="[queueListOpened ? 'fill-[#2C2C2C]' : 'fill-[#B8B8B8]']" :width="16" />
         </div>
-        <div id="profile" class="w-[28px] h-[28px] rounded-full bg-[#FF8400] opacity-50">
-<!--          <img :src="profileImage" class="w-full object-cover aspect-auto overflow-hidden rounded-full" />-->
+        <div id="profile" class="w-[28px] h-[28px] rounded-full bg-[#FFFFFFA3]/10 border border-[#FFFFFFA3] opacity-50 hidden 2xl:inline">
+          <!-- TODO: get user profile picture from some source -->
         </div>
 
       </div>
@@ -194,6 +194,11 @@
         Math.floor(number) % 60
 
     return `${minute}:${seconds}`
+  }
+
+  const queueListOpened = computed(() => store.state.ui.queueListOpened)
+  function toggleQueueList() {
+    store.dispatch('toggleQueueList')
   }
 
   // Key to remount MediaPlayer component
