@@ -131,7 +131,6 @@
       }
 
       function pauseMe() {
-        console.log('pauseMe() returns: ', loadedTrack.value, props.albumInfo.tracklist[0].location)
         return playing.value && (loadedTrack.value === props.albumInfo.tracklist[0].location)
       }
       
