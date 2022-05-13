@@ -11,7 +11,7 @@
 
       <div id="search" class="relative flex items-center w-full rounded-sm my-[16px] h-8">
         <SearchIcon :width="12" :class="'stroke-[#EFEFEF]'" class="absolute mx-4" />
-        <input type="text" placeholder="Search" class="h-full focus:ring-4 focus:ring-[rgb(255,132,0,0.5)] focus:outline-none grow pl-10 text-xs text-[#EFEFEF] font-extralight bg-[#202020] rounded-sm"/>
+        <input type="text" placeholder="Search" class="h-full focus:ml-1 focus:max-w-[95%] focus:ring-4 focus:ring-[rgb(255,132,0,0.5)] focus:outline-none grow pl-10 text-xs text-[#EFEFEF] font-extralight bg-[#202020] rounded-sm"/>
       </div>
 
       <ul id="quickLinks" class="relative flex flex-col gap-[2px] text-[15px] items-start text-[#EFEFEF] w-full my-[16px]">
