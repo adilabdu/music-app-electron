@@ -4,10 +4,14 @@
 
 @layer base {
 
+    @font-face {
+        font-family: 'Inter', sans-serif;
+    }
+
 }
 
 * {
-    @apply select-none focus:outline-none;
+    @apply select-none focus:outline-none font-basic;
 }
 
 body {

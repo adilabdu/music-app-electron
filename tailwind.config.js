@@ -16,6 +16,9 @@ module.exports = {
                     '75%': { height: '0.75rem' },
                     '100%': { height: '1rem' }
                 }
+            },
+            fontFamily: {
+                'basic': ['"Inter"']
             }
         },
     },
