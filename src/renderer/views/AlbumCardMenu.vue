@@ -1,16 +1,40 @@
 <template>
 
-  <ContextMenu class="" :items="menuItems" :open="opened" @close="close" />
+  <ContextMenu class="" :items="menuItems" :open="open" />
+
+  <ContextMenu v-if="!loading" :position="'translate-x-full'" :items="addToPlaylistMenuItems" :open="open" />
 
 </template>
 
 <script setup>
 
-  import { ref } from "vue"
+  import { onMounted, ref } from "vue";
   import ContextMenu from "../components/ContextMenu.vue"
 
-  const emit = defineEmits(['clicked'])
+  const emit = defineEmits(['close'])
   const props = defineProps({
+    open: {
+      type: Boolean,
+      default: false
+    }
+  })
+
+  const loading = ref(true)
+  onMounted(() => {
+    const userPlaylists = window.api.Playlist.all()
+    userPlaylists.forEach(playlist => {
+      addToPlaylistMenuItems.push({
+        title: playlist.name,
+        icon: {
+          name: 'PlaylistIcon',
+          props: {
+            width: 16,
+            class: 'fill-[#FFFFFFA3]'
+          }
+        }
+      })
+    })
+    loading.value = false
   })
 
   const menuItems = [
@@ -46,10 +70,21 @@
     },
   ]
 
-  const opened = ref(false)
-  function openMenu() {
-    opened.value = true
-    emit('opened')
+  const addToPlaylistMenuItems = [
+    {
+      title: 'New Playlist',
+      icon: {
+        name: 'PlusIcon',
+        props: {
+          width: 16,
+          class: 'fill-[#FFFFFFA3]'
+        }
+      }
+    },
+  ]
+
+  function close() {
+    emit('close')
   }
 
 </script>

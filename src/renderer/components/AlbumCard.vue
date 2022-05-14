@@ -1,6 +1,6 @@
 <template>
 
-    <article ref="albumCard" class="flex flex-col min-w-[144px]">
+    <article ref="albumCard" class="flex flex-col min-w-[144px] overflow-auto">
     <div @click="goToTracklist" class="relative">
       <div class="flex justify-between items-end group hover:bg-opacity-20 absolute w-full h-full bg-black bg-opacity-0 rounded-md transition duration-150">
         <div v-if="!albumInfo.tracklist[0].location" class="flex items-center justify-center m-2 w-8 h-8 rounded-full bg-white bg-opacity-0" />
@@ -12,8 +12,6 @@
         </div>
 
         <div @click="openMenu" :class="[menuOpened ? 'bg-opacity-40' : '']" class="relative flex items-center justify-center gap-[0.2rem] m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
-
-          <AlbumCardMenu @opened="menuOpened" />
 
           <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
           <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
@@ -40,7 +38,7 @@
 
 <script>
 
-  import { computed, ref } from "vue"
+  import { computed, ref, watch } from "vue"
 
   import store from "../store"
   import router from "../router"
@@ -151,12 +149,14 @@
 
       }
 
-      const menuOpened = ref(false)
+      const menuOpened = computed(() => store.state.ui.modalOpened && store.state.menu.contextMenuOpened === props.albumInfo.title)
       function openMenu() {
-        menuOpened.value = true
+        inPlace.value = true
+        store.dispatch('toggleModalView')
+        store.dispatch('setContextMenuOpened', props.albumInfo.title)
       }
 
-      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist, menuOpened, openMenu }
+      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist, openMenu, menuOpened }
 
     }
   }
