@@ -1,6 +1,6 @@
 <template>
 
-  <article class="flex flex-col min-w-[144px]">
+    <article ref="albumCard" class="flex flex-col min-w-[144px]">
     <div @click="goToTracklist" class="relative">
       <div class="flex justify-between items-end group hover:bg-opacity-20 absolute w-full h-full bg-black bg-opacity-0 rounded-md transition duration-150">
         <div v-if="!albumInfo.tracklist[0].location" class="flex items-center justify-center m-2 w-8 h-8 rounded-full bg-white bg-opacity-0" />
@@ -10,11 +10,14 @@
         <div v-if="pauseMe()" @click.prevent="pausePlaying" class="flex items-center justify-center m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
           <PauseIcon class="ml-[0.005rem] w-full aspect-auto scale-[45%] fill-white group-hover:opacity-100 opacity-0" />
         </div>
-        <div class="flex items-center justify-center gap-[0.2rem] m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
 
-          <div class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
-          <div class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
-          <div class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
+        <div @click="openMenu" :class="[menuOpened ? 'bg-opacity-40' : '']" class="relative flex items-center justify-center gap-[0.2rem] m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
+
+          <AlbumCardMenu @opened="menuOpened" />
+
+          <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
+          <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
+          <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
 
         </div>
       </div>
@@ -46,9 +49,12 @@
   import PauseIcon from "./Icons/pause.vue"
   import TrackIcon from "./Icons/track.vue"
 
+  import AlbumCardMenu from "../views/AlbumCardMenu.vue";
+
   export default {
     name: "AlbumCard",
     components: {
+      AlbumCardMenu,
       PlayIcon,
       TrackIcon,
       PauseIcon
@@ -138,7 +144,6 @@
 
         store.dispatch('setCurrentAlbum', props.albumInfo)
         console.log("After AlbumCard is clicked, currentAlbum state holds:", store.state.album.currentAlbum)
-        console.log("inPlace value is:", inPlace.value)
         if(inPlace.value === false) {
           router.push({ path: `/albums/${props.albumInfo.id}` })
         }
@@ -146,7 +151,12 @@
 
       }
 
-      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist }
+      const menuOpened = ref(false)
+      function openMenu() {
+        menuOpened.value = true
+      }
+
+      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist, menuOpened, openMenu }
 
     }
   }
