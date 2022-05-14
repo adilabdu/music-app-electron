@@ -52,6 +52,14 @@ const actions = {
         context.commit('shiftQueue')
     },
 
+    clearQueue(context) {
+        context.commit('clearQueue')
+    },
+
+    shuffleQueue(context) {
+        context.commit('shuffleQueue')
+    },
+
     unloadTrack(context) {
         context.commit('unloadTrack')
     },
@@ -103,6 +111,14 @@ const mutations = {
 
     shiftQueue(state) {
         state.queuedTracks.shift()
+    },
+
+    clearQueue(state) {
+        state.queuedTracks = []
+    },
+
+    shuffleQueue(state) {
+        state.queuedTracks = state.queuedTracks.sort(() => Math.random() - 0.5)
     },
 
     unloadTrack(state) {
