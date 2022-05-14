@@ -1,6 +1,6 @@
 <template>
 
-  <li class="overflow-clip hover:bg-[#202020] cursor-pointer flex items-center justify-between h-[34px] text-[13px] text-[#FFFFFFD9] text-center px-[10px]">
+  <li class="overflow-clip hover:bg-[#202020] first:hover:rounded-t-md last:hover:rounded-b-md cursor-pointer flex items-center justify-between h-[34px] text-[13px] text-[#FFFFFFD9] text-center px-[10px]">
     <p>{{ title }}</p>
     <component :is="iconComponent.name" v-bind="iconComponent.props" />
   </li>
