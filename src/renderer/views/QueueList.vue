@@ -5,6 +5,7 @@
 
     <div class="w-full p-[10px] flex justify-between items-center">
       <h3 class="font-bold text-[17px] text-[#FFFFFFEB]">Up next</h3>
+      <button @click="shuffleQueue" class="text-[13px] text-[#FF8400]">Shuffle</button>
     </div>
 
     <div v-if="queuedTracks.length <= 1" class="h-full w-full flex items-center justify-center">
@@ -13,6 +14,9 @@
 
     <div id="queueList" class="overflow-auto text-white">
       <TrackSmallCard class="track-small-card first:hidden" v-for="(track, index) in queuedTracks" :track="track" />
+      <div v-if="queuedTracks.length > 1" class="h-[40px] w-full flex items-center justify-center">
+        <button @click="clearQueue" class="text-[13px] text-[#FF8400]">Clear All</button>
+      </div>
     </div>
 
   </div>
@@ -42,6 +46,14 @@
   watch(queuedTracks, () => {
     console.log('QueuedTracks updated:', queuedTracks.value)
   })
+
+  function clearQueue() {
+    store.dispatch('clearQueue')
+  }
+
+  function shuffleQueue() {
+    store.dispatch('shuffleQueue')
+  }
 
 </script>
 
