@@ -2,9 +2,9 @@
 
   <aside class="fixed h-screen w-0 md:w-[259px] bg-[#272728] flex flex-col md:px-[25px] overflow-clip border-r border-[#404040]">
 
-    <div class="h-[55px] w-full flex items-center justify-start gap-1">
+    <div class="h-[55px] w-full flex items-center justify-start gap-2">
       <img :src="logo" class="w-6 h-6" />
-      <h1 class="text-[#EFEFEF] font-light text-[1.75rem]">Music</h1>
+      <MusicTextIcon :width="72" :class="'fill-[#EFEFEF]'" />
     </div>
 
     <nav class="flex flex-col items-center justify-start overflow-y-auto overflow-x-hidden">
@@ -86,6 +86,7 @@
   import route from '../router/index'
 
   import logo from "../static/favicon.png"
+  import MusicTextIcon from "./Icons/music-text.vue"
   import SearchIcon from "./Icons/search.vue"
   import PlayRoundIcon from "./Icons/play_round.vue"
   import BrowseIcon from "./Icons/browse.vue"
@@ -115,8 +116,8 @@
 
 <style scoped>
 
-li {
-  @apply font-light;
-}
+  li {
+    @apply font-light;
+  }
 
 </style>
