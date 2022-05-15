@@ -11,12 +11,14 @@
 
   import PlusIcon from "./Icons/plus.vue"
   import HeartIcon from "./Icons/heart.vue"
+  import TrackIcon from "./Icons/track.vue"
   import PlaylistIcon from "./Icons/playlist.vue"
 
   export default {
     components: {
       PlusIcon,
       HeartIcon,
+      TrackIcon,
       PlaylistIcon
     },
     props: {
