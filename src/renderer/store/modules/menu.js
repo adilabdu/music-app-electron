@@ -1,5 +1,6 @@
 const state = {
-    contextMenuOpened: null
+    contextMenuOpened: null,
+    contextMenuPosition: {}
 }
 
 const actions = {
@@ -8,6 +9,10 @@ const actions = {
     },
     clearContextMenuOpened(context) {
         context.commit('clearContextMenuOpened')
+        context.dispatch('setContextMenuPosition', {}).then()
+    },
+    setContextMenuPosition(context, payload) {
+        context.commit('setContextMenuPosition', payload)
     }
 }
 
@@ -15,9 +20,12 @@ const mutations = {
     setContextMenuOpened(state, payload) {
         state.contextMenuOpened = payload
     },
-
     clearContextMenuOpened(state) {
         state.contextMenuOpened = null
+    },
+    setContextMenuPosition(state, payload) {
+        state.contextMenuPosition = payload
+        console.log("From store, ContextMenuPosition", state.contextMenuPosition)
     }
 }
 
