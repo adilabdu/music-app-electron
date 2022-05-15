@@ -11,13 +11,12 @@
           <PauseIcon class="ml-[0.005rem] w-full aspect-auto scale-[45%] fill-white group-hover:opacity-100 opacity-0" />
         </div>
 
-        <div @click="openMenu" :class="[menuOpened ? 'bg-opacity-40' : '']" class="relative flex items-center justify-center gap-[0.2rem] m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
-
+        <div ref="elementBounding" @click="openMenu" :class="[menuOpened ? 'bg-opacity-40' : '']" class="relative flex items-center justify-center gap-[0.2rem] m-2 w-8 h-8 rounded-full bg-white group-hover:bg-opacity-40 bg-opacity-0 hover:!bg-opacity-100 hover:bg-[#FF8400]">
           <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
           <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
           <div :class="menuOpened ? 'opacity-100' : 'opacity-0'" class="w-[0.3rem] h-[0.3rem] rounded-full bg-white group-hover:opacity-100 opacity-0"></div>
-
         </div>
+
       </div>
       <img v-if="!! albumInfo['artwork']"
           :src="albumInfo['artwork']"
@@ -38,7 +37,8 @@
 
 <script>
 
-  import { computed, ref, watch } from "vue"
+  import { computed, onMounted, ref, watch } from "vue"
+  import { useElementBounding, useWindowSize } from "@vueuse/core"
 
   import store from "../store"
   import router from "../router"
@@ -149,14 +149,19 @@
 
       }
 
+      const elementBounding = ref()
+      const { x, y } = useElementBounding(elementBounding)
+      const { width, height } = useWindowSize()
+
       const menuOpened = computed(() => store.state.ui.modalOpened && store.state.menu.contextMenuOpened === props.albumInfo.title)
       function openMenu() {
         inPlace.value = true
         store.dispatch('toggleModalView')
+        store.dispatch('setContextMenuPosition', { x: x.value, y: y.value, width: width.value, height: height.value })
         store.dispatch('setContextMenuOpened', props.albumInfo.title)
       }
 
-      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist, openMenu, menuOpened }
+      return { startPlaying, pausePlaying, playMe, pauseMe, goToTracklist, openMenu, menuOpened, elementBounding }
 
     }
   }
