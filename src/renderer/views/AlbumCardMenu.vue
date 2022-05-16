@@ -1,10 +1,10 @@
 <template>
 
-    <ContextMenu :style="{ transform: 'translateY('+ 0 +'%)', top: (renderPosition.y - menuItems.length*34) + 'px', left: (renderPosition.x-200) + 'px' }" @hovered="menuHovered" class="" :items="menuItems" :open="open" />
+    <ContextMenu :style="menuStyle" @hovered="menuHovered" class="" :items="menuItems" :open="open" />
     <ContextMenu
         @leftComponent="playlistMenuLeft"
         v-if="!loading && playlistMenuOpened==='Add to Playlist'"
-        :style="{ transform: 'translateX(100%)', top: (renderPosition.y - menuItems.length*34) + 'px', left: (renderPosition.x-200) + 'px' }"
+        :style="playlistMenuStyle"
         :items="addToPlaylistMenuItems"
         :open="open" />
 
@@ -41,6 +41,10 @@
     })
     loading.value = false
   })
+
+  const renderPosition = computed(() => store.state.menu.contextMenuPosition)
+  const overflow_x = computed(() => (renderPosition.value.width - renderPosition.value.x) < 350)
+  const overflow_y = computed(() => (renderPosition.value.y) <= 225)
 
   const menuItems = [
     {
@@ -94,6 +98,11 @@
       }
     },
   ]
+  const menuStyle = {
+    transform: overflow_y.value ? 'translateY(100%)': 'translateY(0%)',
+    top: (renderPosition.value.y - (menuItems.length * 34)) + 'px',
+    left: (renderPosition.value.x - 200) + 'px'
+  }
 
   const addToPlaylistMenuItems = [
     {
@@ -107,6 +116,11 @@
       }
     },
   ]
+  const playlistMenuStyle = {
+    transform: `translate(${overflow_x.value ? '-100%' : '100%'}, 0%)`,
+    top: overflow_y.value ? (renderPosition.value.y) + 'px' : (renderPosition.value.y - (menuItems.length * 34)) + 'px',
+    left: (renderPosition.value.x - 200) + 'px'
+  }
 
   const playlistMenuOpened = ref(null)
   function menuHovered(component) {
@@ -120,14 +134,6 @@
   function close() {
     emit('close')
   }
-
-  const renderPosition = computed(() => store.state.menu.contextMenuPosition)
-  // const menuPosition = computed(() => {
-  //   let position = []
-  //   if ( (renderPosition.value.width - renderPosition.value.x) < 450 ) {
-  //     position.push('')
-  //   }
-  // })
 
 </script>
 
