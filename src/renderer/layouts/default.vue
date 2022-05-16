@@ -1,5 +1,7 @@
 <template>
 
+  <Modal />
+
   <div class="relative min-h-screen w-full flex">
 
     <Navigation />
@@ -30,6 +32,7 @@
   import Navigation from "../components/Navigation.vue";
   import Header from "../components/Header.vue";
   import QueueList from "../views/QueueList.vue";
+  import Modal from "../components/Modal.vue"
 
 </script>
 

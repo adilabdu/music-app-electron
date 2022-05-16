@@ -85,7 +85,8 @@
             {
               title: track.title,
               location: track.preview,
-              duration: track.duration
+              duration: track.duration,
+              local: false
             }
           ]
         }
