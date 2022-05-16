@@ -25,13 +25,25 @@
       title: 'Hits of the Moment'
     },
     {
-      id: '7662551722',
-      title: '2010\'s Raps'
+      id: "3153080842",
+      title: 'Afrobeats'
     },
     {
       id: '1677006641',
       title: 'Hip-Hop Hits'
     },
+    {
+      id: '7662551722',
+      title: '2010\'s Raps'
+    },
+    {
+      id: '1033974391',
+      title: 'Epic Soundtracks'
+    },
+    {
+      id: '3645740262',
+      title: '100% Eminem'
+    }
   ]
 
   const loadingComponents = ref([])
