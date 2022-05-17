@@ -153,6 +153,7 @@
     })
 
     store.dispatch('toggleModalView')
+    store.dispatch('setCurrentAlbum', props.albumInfo)
     store.dispatch('setContextMenuPosition', { x: bounding.x, y: bounding.y, width: width.value, height: height.value })
     store.dispatch('setContextMenuOpened', props.albumInfo.title)
   }
