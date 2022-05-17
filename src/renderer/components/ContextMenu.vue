@@ -10,7 +10,7 @@
       <ContextMenuItem
           @mouseover="hovered(item.title)"
           @mouseleave="left(item.title)"
-          @clicked="clicked(item.title)"
+          @click="clicked(item.title)"
           v-for="item in items"
           :title="item.title"
           :iconComponent="item.icon"
