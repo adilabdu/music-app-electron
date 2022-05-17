@@ -13,13 +13,15 @@
   import HeartIcon from "./Icons/heart.vue"
   import TrackIcon from "./Icons/track.vue"
   import PlaylistIcon from "./Icons/playlist.vue"
+  import PlayNextIcon from "./Icons/play-next.vue"
 
   export default {
     components: {
       PlusIcon,
       HeartIcon,
       TrackIcon,
-      PlaylistIcon
+      PlaylistIcon,
+      PlayNextIcon
     },
     props: {
       title: {
