@@ -56,6 +56,14 @@ const actions = {
         context.commit('clearQueue')
     },
 
+    addToQueueTop(context, payload) {
+        context.commit('addToQueueTop', payload)
+    },
+
+    addToQueueBottom(context, payload) {
+        context.commit('addToQueueBottom', payload)
+    },
+
     shuffleQueue(context) {
         context.commit('shuffleQueue')
     },
@@ -115,6 +123,14 @@ const mutations = {
 
     clearQueue(state) {
         state.queuedTracks = []
+    },
+
+    addToQueueTop(state, payload) {
+        state.queuedTracks.unshift(...payload)
+    },
+
+    addToQueueBottom(state, payload) {
+        state.queuedTracks.push(...payload)
     },
 
     shuffleQueue(state) {
