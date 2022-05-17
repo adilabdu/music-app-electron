@@ -1,6 +1,6 @@
 <template>
 
-    <ContextMenu :style="menuStyle" @hovered="menuHovered" class="" :items="menuItems" :open="open" />
+    <ContextMenu :style="menuStyle" @hovered="menuHovered" @clicked="clicked" class="" :items="menuItems" :open="open" />
     <ContextMenu
         @leftComponent="playlistMenuLeft"
         v-if="!loading && playlistMenuOpened==='Add to Playlist'"
@@ -60,20 +60,29 @@
     {
       title: 'Play Next',
       icon: {
-        name: 'TrackIcon',
+        name: 'PlayNextIcon',
         props: {
           width: 14,
-          class: 'fill-[#FFFFFFA3]'
+          fill: '#FFFFFFA3',
+          stroke: {
+            width: 35,
+            color: '#FFFFFFA3'
+          }
         }
       }
     },
     {
       title: 'Play Later',
       icon: {
-        name: 'TrackIcon',
+        name: 'PlayNextIcon',
         props: {
           width: 14,
-          class: 'fill-[#FFFFFFA3]'
+          class: 'scale-y-[-1]',
+          fill: '#FFFFFFA3',
+          stroke: {
+            width: 35,
+            color: '#FFFFFFA3'
+          }
         }
       }
     },
@@ -133,6 +142,41 @@
 
   function close() {
     emit('close')
+  }
+
+  function clicked(menuItem) {
+
+    switch(menuItem) {
+
+      case 'Play Next':
+        store.dispatch('addToQueueTop', prepareForQueue(store.state.album.currentAlbum))
+        break;
+      case 'Play Later':
+        store.dispatch('addToQueueBottom', prepareForQueue(store.state.album.currentAlbum))
+        break;
+      default:
+
+    }
+
+  }
+
+  function prepareForQueue(album) {
+    // TODO: this needs to be encapsulated
+    return album.tracklist.map(track => {
+      return {
+        title: track.title,
+        artist: album.artist,
+        album: album.title,
+        location: track.location,
+        artwork: album.artwork,
+        local: track.local,
+        duration: toMinutes(track.duration)
+      }
+    })
+  }
+
+  function toMinutes(number) {
+    return `${Math.floor(number / 60)}:${(number % 60) > 9 ? (number % 60) : '0' + (number % 60)}`
   }
 
 </script>
