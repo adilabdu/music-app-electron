@@ -70,29 +70,45 @@
   function startPlaying() {
     inPlace.value = true
 
-    if(!! !store.state.player.currentTrack ||
-        (store.state.player.currentTrack.location !==  props.albumInfo.tracklist[0].location)) {
-
-      store.dispatch('unloadTrack')
-    }
-
-    loadTrack().then(() => store.dispatch('play'))
-
-    const queueableTracks = props.albumInfo.tracklist.map(track => {
-      return {
-        title: track.title,
-        artist: props.albumInfo.artist,
-        album: props.albumInfo.title,
-        location: track.location,
-        artwork: props.albumInfo.artwork,
-        local: track.local,
-        duration: toMinutes(track.duration)
-      }
+    console.log("data:", {
+      play_now: (() => {
+        return props.albumInfo.tracklist[0]
+      })(),
+      queue: (() => {
+        // props.albumInfo.tracklist
+        return props.albumInfo.tracklist.slice(1)
+      })()
     })
 
-    store.dispatch('populateQueue', queueableTracks).then(() => {
-      console.log('QueuedTracks:', store.state.player.queuedTracks)
-    })
+    console.log('This track should be dispatched:', props.albumInfo.track(0))
+
+    store.dispatch('loadTrack', props.albumInfo.track(0))
+        .then(() => store.dispatch('play'))
+
+    // if(!! !store.state.player.currentTrack ||
+    //     (store.state.player.currentTrack.location !==  props.albumInfo.tracklist[0].location)) {
+    //
+    //   store.dispatch('unloadTrack')
+    // }
+    //
+    // loadTrack().then(() => store.dispatch('play'))
+    //
+    // const queueableTracks = props.albumInfo.tracklist.map(track => {
+    //   return {
+    //     title: track.title,
+    //     artist: props.albumInfo.artist,
+    //     album: props.albumInfo.title,
+    //     location: track.location,
+    //     artwork: props.albumInfo.artwork,
+    //     local: track.local,
+    //     duration: toMinutes(track.duration)
+    //   }
+    // })
+    //
+    // store.dispatch('populateQueue', queueableTracks).then(() => {
+    //   console.log('QueuedTracks:', store.state.player.queuedTracks)
+    // })
+
   }
 
   function toMinutes(number) {
@@ -135,7 +151,6 @@
   function goToTracklist() {
 
     store.dispatch('setCurrentAlbum', props.albumInfo)
-    console.log("After AlbumCard is clicked, currentAlbum state holds:", store.state.album.currentAlbum)
     if(inPlace.value === false) {
       router.push({ path: `/albums/${props.albumInfo.id}` })
     }

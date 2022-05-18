@@ -26,7 +26,7 @@
 
         <div v-if="!store.state.player.emptyTrack" class="w-full flex flex-col items-center justify-center gap-1 mt-[4px]">
           <div id="trackTitle" class="justify-center flex items-center text-[13px] text-[#FFFFFFEB] leading-none font-light">
-            {{ track.title }}
+            {{ track.track.title }}
             <div class="flex ml-2 gap-0.5">
               <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400] group-hover:opacity-100 opacity-0 transition duration-150"></div>
               <div class="w-[0.2rem] h-[0.2rem] rounded-full bg-[#FF8400] group-hover:opacity-100 opacity-0 transition duration-150"></div>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <p class="text-[13px] text-[#FFFFFFA3] leading-none font-light w-full justify-center flex">
-            <a href="#" class="hover:underline" id="trackArtist">{{ track.artist }}</a>
+            <a href="#" class="hover:underline" id="trackArtist">{{ track.track.artist }}</a>
             &#65293;
             <a href="#" class="hover:underline" id="trackAlbum">{{ track.album }}</a>
           </p>
@@ -119,11 +119,11 @@
 
   const validSource = ref()
   const loading = ref(true)
-  const trackLocation = computed(() => store.state.player.currentTrack.location)
+  const trackLocation = computed(() => store.state.player.currentTrack.track)
   watch(trackLocation, () => {
     if(store.state.player.currentTrack.local) {
       loading.value = true
-      bufferToBlob(trackLocation.value).then((res) => {
+      bufferToBlob(trackLocation.value.location).then((res) => {
         validSource.value = res
       }).finally(() => loading.value = false)
     } else {

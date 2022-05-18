@@ -15,7 +15,7 @@
 
         <h1 class="font-medium text-[26px] text-[#FFFFFFEB] leading-none"> {{ !! album.title ? album.title : '' }} </h1>
         <h1 class="font-light text-[26px] text-[#FF8400] leading-none"> {{ !! album.artist ? album.artist : '' }} </h1>
-        <h3 class="text-[12px] text-[#FFFFFFA3] leading-none font-medium uppercase">{{ allGenres }}</h3>
+<!--        <h3 class="text-[12px] text-[#FFFFFFA3] leading-none font-medium uppercase">{{ allGenres }}</h3>-->
 
       </div>
 
@@ -60,16 +60,14 @@
     }
   })
 
-  const genres = ref()
-  onMounted(() => {
-    genres.value = window.api.Album.genres(props.album['id']).map(genre => {
-      return genre.name
-    })
-  })
-
-  const allGenres = ref()
-
-  watch(genres, () => allGenres.value = genres.value.join(" • "))
+  // const genres = ref()
+  // onMounted(() => {
+  //   genres.value = window.api.Album.genres(props.album['id']).map(genre => {
+  //     return genre.name
+  //   })
+  // })
+  // const allGenres = ref()
+  // watch(genres, () => allGenres.value = genres.value.join(" • "))
 
 </script>
 
