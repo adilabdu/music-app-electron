@@ -55,10 +55,6 @@
     }
   })
 
-  onMounted(() => {
-    console.log('AlbumCard mounted. Tracklist:', props.albumInfo)
-  })
-
   const element = ref()
   const circle = useElementBounding(element)
   const { width, height } = useWindowSize()
@@ -70,67 +66,11 @@
   function startPlaying() {
     inPlace.value = true
 
-    console.log("data:", {
-      play_now: (() => {
-        return props.albumInfo.tracklist[0]
-      })(),
-      queue: (() => {
-        // props.albumInfo.tracklist
-        return props.albumInfo.tracklist.slice(1)
-      })()
-    })
-
-    console.log('This track should be dispatched:', props.albumInfo.track(0))
-
-    store.dispatch('loadTrack', props.albumInfo.track(0))
+    store.dispatch('loadTrack', props.albumInfo.tracklist[0])
         .then(() => store.dispatch('play'))
 
-    // if(!! !store.state.player.currentTrack ||
-    //     (store.state.player.currentTrack.location !==  props.albumInfo.tracklist[0].location)) {
-    //
-    //   store.dispatch('unloadTrack')
-    // }
-    //
-    // loadTrack().then(() => store.dispatch('play'))
-    //
-    // const queueableTracks = props.albumInfo.tracklist.map(track => {
-    //   return {
-    //     title: track.title,
-    //     artist: props.albumInfo.artist,
-    //     album: props.albumInfo.title,
-    //     location: track.location,
-    //     artwork: props.albumInfo.artwork,
-    //     local: track.local,
-    //     duration: toMinutes(track.duration)
-    //   }
-    // })
-    //
-    // store.dispatch('populateQueue', queueableTracks).then(() => {
-    //   console.log('QueuedTracks:', store.state.player.queuedTracks)
-    // })
+    store.dispatch('populateQueue', props.albumInfo.tracklist.slice(1))
 
-  }
-
-  function toMinutes(number) {
-    return `${Math.floor(number / 60)}:${(number % 60) > 9 ? (number % 60) : '0' + (number % 60)}`
-  }
-
-  async function loadTrack() {
-
-    const local = ref(props.albumInfo.tracklist[0].local)
-    console.log('local:', local.value)
-    const payload = {
-      title: props.albumInfo.tracklist[0].title,
-      artist: props.albumInfo.artist,
-      album: props.albumInfo.title,
-      location: props.albumInfo.tracklist[0].location,
-      artwork: props.albumInfo.artwork,
-      local: props.albumInfo.tracklist[0].local
-    }
-
-    console.log("Payload of track to be loaded", payload)
-
-    await store.dispatch('loadTrack', payload)
   }
 
   function pausePlaying() {
