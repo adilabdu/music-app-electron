@@ -60,31 +60,13 @@
 
   function startPlaying(index) {
 
+    // Check if a track is already loaded and if it is the same track as this
     if(!! !store.state.player.currentTrack ||
         (store.state.player.currentTrack.location !==  props.data[index][4])) {
 
-      store.dispatch('unloadTrack')
+      store.dispatch('loadTrack', store.state.album.currentAlbum.tracklist[index])
     }
-
-    loadTrack(index).then(() => store.dispatch('play'))
-  }
-
-  async function loadTrack(index) {
-
-    const album = store.state.album.currentAlbum
-
-    const payload = {
-      title: album.tracklist[index].title,
-      artist: album.artist,
-      album: album.title,
-      location: album.tracklist[index].location,
-      artwork: album.artwork,
-      local: album.tracklist[index].local
-    }
-
-    console.log("Payload from Table:", payload)
-    await store.dispatch('loadTrack', payload)
-
+      store.dispatch('play')
   }
 
   function pausePlaying() {
