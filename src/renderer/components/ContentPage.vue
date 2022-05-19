@@ -7,7 +7,7 @@
       <hr class="border-[#3B3B3B] border-t-[1px]">
     </div>
 
-    <div v-if="true" class="justify-center items-center flex w-full"
+    <div v-if="loading" class="justify-center items-center flex w-full"
          :class="!! pageTitle ? 'h-[calc(100vh-(55px+40px+40px+51px))]' : 'h-[calc(100vh-(55px+40px+40px))]'">
       <LoadingIcon :width="40" :class="'fill-[#818181]'" />
     </div>
