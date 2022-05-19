@@ -57,14 +57,12 @@
 
       store.dispatch('unloadTrack')
       if (store.state.player.queuedTracks.length > 0) {
-        store.dispatch('shiftQueue').then(() => {
-          if (store.state.player.queuedTracks.length > 0) {
-            store.dispatch('loadTrack', store.state.player.queuedTracks[0]).then(() => {
-            }).then(() => store.dispatch('play'))
-          }
-        })
-      }
-      else {
+
+        store.dispatch('loadTrack', store.state.player.queuedTracks[0]).then(() => {
+          store.dispatch('play')
+        }).then(() => store.dispatch('shiftQueue'))
+
+      } else {
         store.dispatch('resetPlayer')
       }
     }
