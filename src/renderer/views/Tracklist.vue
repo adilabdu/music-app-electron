@@ -22,30 +22,15 @@
     }
   })
 
-  const tracklist = !! props.album['tracklist'] ? props.album['tracklist'].map((track) => {
+  const tracklist = props.album['tracklist'].map((track) => {
     return {
-      0: !! track['track_position'] ? track['track_position'] : '',
-      1: !! track.title ? track.title : '',
-      2: !! (track['contributing_artist'] && props.album['artist']) ?
-          (track['contributing_artist'] === props.album['artist'] ?
-          '' :
-          track['contributing_artist']) : '',
-      3: !!track.duration ? toMinutes(track.duration) : '',
-      4: !!track.location ? track.location : ''
+      0: track['track_position'],
+      1: track.title,
+      2: (track.artist === props.album.artist) ? '' : track.artist,
+      3: track.duration,
+      4: track.location
     }
-  }) : [
-    {
-      0: 1,
-      1: props.album['title'],
-      2: props.album['artist'],
-      3: !!props.album['duration'] ? toMinutes(props.album['duration']) : '',
-      4: !!props.album['location'] ? props.album['location'] : ''
-    }
-  ]
-
-  function toMinutes(number) {
-    return `${Math.floor(number / 60)}:${(number % 60) > 9 ? (number % 60) : '0' + (number % 60)}`
-  }
+  })
 
 </script>
 

@@ -9,7 +9,7 @@
 
     <div v-if="loading" class="justify-center items-center flex w-full"
          :class="!! pageTitle ? 'h-[calc(100vh-(55px+40px+40px+51px))]' : 'h-[calc(100vh-(55px+40px+40px))]'">
-      <LoadingIcon :width="40" :class="'fill-[#818181] animate-[spin_2s_linear_infinite]'" />
+      <LoadingIcon :width="40" :class="'fill-[#818181]'" />
     </div>
 
     <div :class="loading ? 'hidden' : ''">

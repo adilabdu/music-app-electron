@@ -2,7 +2,7 @@
 
   <div class="flex items-center gap-3 w-full focus:bg-[#FFFFFF1A] rounded-md p-[10px] text-[13px] font-light"
        :class="playing ? 'bg-[#FFFFFF1A]' : ''">
-    <img loading="lazy" class="w-[40px] h-[40px] rounded-sm" :src="track.artwork" />
+    <img loading="lazy" class="w-[40px] h-[40px] rounded-sm" :src="track.album.artwork" />
     <div class="grow flex flex-col justify-start gap-1 max-w-[60%]">
       <p class="text-[#FFFFFFEB] leading-[1.05] truncate">{{ track.title }}</p>
       <p class="text-[#FFFFFFA3] leading-[1.05] truncate">{{ track.artist }}</p>

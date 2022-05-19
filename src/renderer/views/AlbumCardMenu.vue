@@ -149,34 +149,15 @@
     switch(menuItem) {
 
       case 'Play Next':
-        store.dispatch('addToQueueTop', prepareForQueue(store.state.album.currentAlbum))
+        store.dispatch('addToQueueTop', store.state.album.currentAlbum.tracklist)
         break;
       case 'Play Later':
-        store.dispatch('addToQueueBottom', prepareForQueue(store.state.album.currentAlbum))
+        store.dispatch('addToQueueBottom', store.state.album.currentAlbum.tracklist)
         break;
       default:
 
     }
 
-  }
-
-  function prepareForQueue(album) {
-    // TODO: this needs to be encapsulated
-    return album.tracklist.map(track => {
-      return {
-        title: track.title,
-        artist: album.artist,
-        album: album.title,
-        location: track.location,
-        artwork: album.artwork,
-        local: track.local,
-        duration: toMinutes(track.duration)
-      }
-    })
-  }
-
-  function toMinutes(number) {
-    return `${Math.floor(number / 60)}:${(number % 60) > 9 ? (number % 60) : '0' + (number % 60)}`
   }
 
 </script>

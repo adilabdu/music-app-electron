@@ -8,13 +8,13 @@
       <button @click="shuffleQueue" class="text-[13px] text-[#FF8400]">Shuffle</button>
     </div>
 
-    <div v-if="queuedTracks.length <= 1" class="h-full w-full flex items-center justify-center">
+    <div v-if="queuedTracks.length < 1" class="h-full w-full flex items-center justify-center">
       <p class="text-[13px] text-[#FFFFFFA3]">No upcoming songs</p>
     </div>
 
     <div id="queueList" class="overflow-auto text-white">
-      <TrackSmallCard class="track-small-card first:hidden" v-for="(track, index) in queuedTracks" :track="track" />
-      <div v-if="queuedTracks.length > 1" class="h-[40px] w-full flex items-center justify-center">
+      <TrackSmallCard class="track-small-card" v-for="track in queuedTracks" :track="track" />
+      <div v-if="queuedTracks.length > 0" class="h-[40px] w-full flex items-center justify-center">
         <button @click="clearQueue" class="text-[13px] text-[#FF8400]">Clear All</button>
       </div>
     </div>
@@ -31,14 +31,7 @@
   import TrackSmallCard from "../components/TrackSmallCard.vue";
 
   const queuedTracks = computed(() => {
-    return store.state.player.queuedTracks.map((track) => {
-      return {
-        artist: track.artist,
-        title: track.title,
-        artwork: track.artwork,
-        duration: track.duration ?? "-:--"
-      }
-    })
+    return store.state.player.queuedTracks
   })
 
   const queueListOpened = computed(() => store.state.ui.queueListOpened)
@@ -86,7 +79,7 @@
     background-color: rgba(116,116,116,1) !important;
   }
 
-  .track-small-card:nth-child(2) {
+  .track-small-card:nth-child(1) {
     @apply bg-[#FFFFFF1A];
   }
 

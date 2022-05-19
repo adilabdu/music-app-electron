@@ -6,7 +6,8 @@ module.exports = {
     theme: {
         extend: {
             animation: {
-                play: 'play 500ms linear infinite alternate'
+                play: 'play 500ms linear infinite alternate',
+                blink: 'blink 500ms linear infinite alternate'
             },
             keyframes: {
                 play: {
@@ -15,6 +16,10 @@ module.exports = {
                     '50%': { height: '0.5rem' },
                     '75%': { height: '0.75rem' },
                     '100%': { height: '1rem' }
+                },
+                blink: {
+                    '0%': { opacity: '12.5%' },
+                    '100%': { opacity: '100%' }
                 }
             },
             fontFamily: {

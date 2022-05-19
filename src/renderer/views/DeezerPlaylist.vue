@@ -2,7 +2,7 @@
 
   <AlbumCarousel @previous="fetchPrevious" @next="fetchNext" :display="display" :loading="loading" :title="title" :available="{ next: !! next, prev: !! prev }">
     <AlbumCard :show-album-title="false" v-if="loading === false" v-for="i in display" :key="i"
-               :album-info="albumInfo(tracks[i-1])" />
+               :album-info="(albums[i-1])" />
   </AlbumCarousel>
 
 </template>
@@ -18,6 +18,8 @@
 
   import AlbumCarousel from "../components/AlbumCarousel.vue";
   import AlbumCard from "../components/AlbumCard.vue";
+
+  import Album from "../models/albums"
 
   const props = defineProps({
     title: {
@@ -45,7 +47,7 @@
     display.value = xxxl.value ? 6 : ( xxl.value ? 5 : ( xl.value ? 4 : 50) )
   })
 
-  const tracks = ref()
+  const albums = ref()
   const total = ref(null)
   const next = ref(null)
   const prev = ref(null)
@@ -76,22 +78,27 @@
       total.value = response.data['total']
       next.value = response.data['next'] ? response.data['next'] : null
       prev.value = response.data['prev'] ? response.data['prev'] : null
-      tracks.value = response.data.data.map(track => {
-        return {
+      albums.value = response.data.data.map(track => {
+
+        return new Album({
+          id: track.id,
           title: track.album.title,
           artist: track.artist.name,
-          artwork: track.album['cover_medium'] ? track.album['cover_medium'] : '',
+          artwork: track.album['cover_medium'],
+          local: false,
           tracklist: [
             {
               title: track.title,
+              artist: track.artist.name,
               location: track.preview,
               duration: track.duration,
-              local: false
+              local: false,
+              track_position: 1
             }
           ]
-        }
+        })
+
       })
-      console.log('tracks is', tracks.value[0].artwork)
     }).catch((err) => {
       router.push({ path: '/albums' })
       console.error(err)
@@ -101,10 +108,6 @@
       emits ? emit('loading', false) : ''
 
     })
-  }
-
-  function albumInfo(track) {
-    return track
   }
 
 </script>
