@@ -1,12 +1,13 @@
 export default class Track {
 
-    constructor(track, artist=null) {
+    constructor(track, album=null) {
         this.title = track.title ?? 'Unknown track'
-        this.artist = track.contributing_artist ?? track.artist ?? artist.artist
+        this.artist = track.contributing_artist ?? track.artist ?? album.artist
         this.location = track.location
         this.duration = this.toMinutes(track.duration)
-        this.local = track.local ?? artist.local ?? false
+        this.local = track.local ?? album.local ?? false
         this.track_position = track.track_position ?? 1
+        this.album = album
     }
 
     toMinutes(number) {
@@ -16,4 +17,12 @@ export default class Track {
         return '-:--'
     }
 
+    static async bufferToBlob(buffer) {
+
+        const file = (await window.io.readFile(buffer, false)).buffer
+        console.log('Inside renderer buffer converter:', file)
+
+        const blob = new Blob([file], { type: "audio/mp3" });
+        return window.URL.createObjectURL(blob);
+    }
 }

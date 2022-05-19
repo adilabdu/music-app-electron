@@ -9,18 +9,17 @@ export default class Album {
         this.artwork = album.artwork ?? null
         this.local = album.local ?? false
         this.tracklist = album.tracklist.map(track => {
-            return new Track(track, this.artist)
+            return new Track(track, this.album())
         })
     }
 
-    track(index) {
+    album() {
         return {
             id: this.id,
-            album: this.title,
+            title: this.title,
             artist: this.artist,
             artwork: this.artwork,
-            local: this.local,
-            track: this.tracklist[index]
+            local: this.local
         }
     }
 
