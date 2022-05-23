@@ -7,10 +7,11 @@ export default class Album {
         this.title = album.title ?? 'Unknown Album'
         this.artist = album.artist ?? 'Unknown Artist'
         this.artwork = album.artwork ?? null
+        this.description = album.description ?? null
         this.local = album.local ?? false
-        this.tracklist = album.tracklist.map(track => {
-            return new Track(track, this.album())
-        })
+        this.tracklist = album.tracklist ? album.tracklist.map(track => {
+                return new Track(track, this.album())
+            }) : []
     }
 
     album() {
@@ -21,6 +22,12 @@ export default class Album {
             artwork: this.artwork,
             local: this.local
         }
+    }
+
+    addTrack(track, album=null) {
+        const data = new Track(track, album ?? this.album())
+        console.log('Hello world! FROM Album model class addTrack', { data })
+        this.tracklist.push(data)
     }
 
 }
