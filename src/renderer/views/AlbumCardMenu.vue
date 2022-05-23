@@ -1,8 +1,9 @@
 <template>
 
-    <ContextMenu :style="menuStyle" @hovered="menuHovered" @clicked="clicked" class="" :items="menuItems" :open="open" />
+    <ContextMenu :style="menuStyle" @hovered="menuHovered" @clicked="chooseMenuAction" class="" :items="menuItems" :open="open" />
     <ContextMenu
         @leftComponent="playlistMenuLeft"
+        @clicked="addToPlaylist"
         v-if="!loading && playlistMenuOpened==='Add to Playlist'"
         :style="playlistMenuStyle"
         :items="addToPlaylistMenuItems"
@@ -12,7 +13,7 @@
 
 <script setup>
 
-  import {onMounted, ref, computed, render} from "vue";
+  import { onMounted, ref, computed } from "vue";
   import store from "../store/index"
   import ContextMenu from "../components/ContextMenu.vue"
 
@@ -144,7 +145,7 @@
     emit('close')
   }
 
-  function clicked(menuItem) {
+  function chooseMenuAction(menuItem) {
 
     switch(menuItem) {
 
@@ -155,6 +156,29 @@
         store.dispatch('addToQueueBottom', store.state.album.currentAlbum.tracklist)
         break;
       default:
+
+    }
+
+  }
+
+  function addToPlaylist(menuItem) {
+
+    try {
+
+      const playlist_id = window.api.Playlist.where({ name: menuItem }).id
+      const tracks_id = []
+
+      store.state.album.currentAlbum.tracklist.forEach(track => {
+        const track_id = window.api.Track.where({ location: track.location }).id
+        tracks_id.push(track_id)
+      })
+
+      console.log(`Track IDs found: ${tracks_id}`)
+      window.api.Playlist.addTrack(playlist_id, tracks_id)
+
+    } catch (error) {
+
+      console.log('Error occurred while populating Playlist', { error })
 
     }
 
