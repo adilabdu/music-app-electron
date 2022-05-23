@@ -96,7 +96,10 @@ export class Model {
 
         try {
             this['_result'] = database.prepare(query).all()
-            console.log("SELECT Success:", query)
+            console.log("SELECT Success:", {
+                query,
+                result: this['_result']
+            })
             return this
         } catch (e) {
             console.log("Error during SELECT:", e)
