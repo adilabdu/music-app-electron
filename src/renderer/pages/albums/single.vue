@@ -1,6 +1,8 @@
 <template>
 
-  <Tracklist :album="album" />
+  <ContentPage>
+    <Tracklist :album="album" />
+  </ContentPage>
 
 </template>
 
@@ -8,6 +10,8 @@
 
   import { computed, onBeforeUnmount } from "vue"
   import store from "../../store/index"
+
+  import ContentPage from "../../components/ContentPage.vue";
   import Tracklist from "../../views/Tracklist.vue";
 
   const album = computed(() => store.state.album.currentAlbum)
