@@ -40,6 +40,14 @@ const findArtist = (id) => {
   return require('../main/models/artists').Artist.find(id)
 }
 
+const whereTrack = (constraint) => {
+  return require('../main/models/tracks').Track.where(constraint).get()[0]
+}
+
+const wherePlaylist = (constraint) => {
+  return require('../main/models/playlists').Playlist.where(constraint).get()[0]
+}
+
 const allPlaylists = () => {
   return require('../main/models/playlists').Playlist.all().get()
 }
@@ -54,6 +62,14 @@ const paginateAlbums = (paginate, offset= 0) => {
 
 const tracklist = (id) => {
   return require('../main/models/albums').Album.from(id).tracks().get()
+}
+
+const playlistTracklist = (id) => {
+  return require('../main/models/playlists').Playlist.from(id).tracks().get()
+}
+
+const addToPlaylist = (playlist_id, track_id) => {
+  return require('../main/models/playlists').Playlist.from(playlist_id).attachTracks(track_id)
 }
 
 const setGenres = (album_id, genre_ids) => {
@@ -87,12 +103,16 @@ contextBridge.exposeInMainWorld('api', {
   Track: {
     create: createTrack,
     find: findTrack,
+    where: whereTrack,
     tracklist: tracklist
   },
   Playlist: {
     create: createPlaylist,
     find: findPlaylist,
-    all: allPlaylists
+    all: allPlaylists,
+    where: wherePlaylist,
+    addTrack: addToPlaylist,
+    tracklist: playlistTracklist
   }
 })
 
