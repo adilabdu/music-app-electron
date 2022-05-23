@@ -65,12 +65,11 @@
           <h3 class="text-[10px] text-[#FFFFFFA3] font-medium ml-[1px]">Playlists</h3>
           <h3 @click="createPlaylist" class="cursor-pointer text-[12px] text-[#FFFFFFA3] font-medium ml-[1px] opacity-0 group-hover:opacity-100">+</h3>
         </div>
+
         <ul id="test" class="relative flex flex-col gap-[2px] text-[15px] items-start text-[#EFEFEF] w-full mb-[16px]">
-          <li v-for="playlist in userPlaylists" class="h-[32px] rounded-md w-full py-[1px] flex justify-start items-center gap-4 px-2">
-            <PlaylistIcon :width="16" :class="'fill-[#B9B9B9]'" />
-            <a href="#" class="truncate">{{ playlist['name'] }}</a>
-          </li>
+          <PlaylistSmallCard v-for="playlist in userPlaylists" :playlist="playlist" />
         </ul>
+
       </div>
 
     </nav>
@@ -82,10 +81,11 @@
 
 <script setup>
 
-  import {computed, watch, onMounted, ref } from "vue"
+  import {computed, onMounted, ref } from "vue"
   import route from '../router/index'
 
   import logo from "../static/favicon.png"
+  import PlaylistSmallCard from "./PlaylistSmallCard.vue"
   import MusicTextIcon from "./Icons/music-text.vue"
   import SearchIcon from "./Icons/search.vue"
   import PlayRoundIcon from "./Icons/play_round.vue"
@@ -95,7 +95,6 @@
   import ArtistIcon from "./Icons/artist.vue"
   import AlbumIcon from "./Icons/album.vue"
   import SongIcon from "./Icons/song.vue"
-  import PlaylistIcon from "./Icons/playlist.vue";
 
   const userPlaylists = ref(null)
   onMounted(() => {
