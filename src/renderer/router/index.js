@@ -8,6 +8,10 @@ import AlbumLayout from '../pages/albums/index.vue'
 import Albums from '../pages/albums/all.vue'
 import Album from '../pages/albums/single.vue'
 
+import PlaylistLayout from '../pages/playlists/index.vue'
+import Playlists from '../pages/playlists/all.vue'
+import Playlist from '../pages/playlists/single.vue'
+
 import Tracklist from '../views/Tracklist.vue'
 
 const routes = [
@@ -55,6 +59,23 @@ const routes = [
                 path: ':id',
                 name: 'Album',
                 component: Album
+            }
+        ]
+    },
+    {
+        path: '/playlists',
+        name: 'PlaylistLayout',
+        component: PlaylistLayout,
+        children: [
+            {
+                path: '',
+                name: 'Playlists',
+                component: Playlists
+            },
+            {
+                path: ':id',
+                name: 'Playlist',
+                component: Playlist
             }
         ]
     },
