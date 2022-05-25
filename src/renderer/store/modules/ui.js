@@ -1,6 +1,7 @@
 const state = {
     queueListOpened: false,
-    modalOpened: false
+    modalOpened: false,
+    draggedCard: null
 }
 
 const actions = {
@@ -9,6 +10,9 @@ const actions = {
     },
     toggleModalView(context) {
         context.commit('toggleModalView')
+    },
+    setDraggedCard(context, payload) {
+        context.commit('setDraggedCard', payload)
     }
 }
 
@@ -18,6 +22,9 @@ const mutations = {
     },
     toggleModalView(state) {
         state.modalOpened = !state.modalOpened
+    },
+    setDraggedCard(state, payload) {
+        state.draggedCard = payload
     }
 }
 
