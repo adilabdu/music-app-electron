@@ -68,6 +68,10 @@ const actions = {
         context.commit('shuffleQueue')
     },
 
+    repositionTrackInQueue(context, payload) {
+        context.commit('repositionTrackInQueue', payload)
+    },
+
     unloadTrack(context) {
         context.commit('unloadTrack')
     },
@@ -135,6 +139,18 @@ const mutations = {
 
     shuffleQueue(state) {
         state.queuedTracks = state.queuedTracks.sort(() => Math.random() - 0.5)
+    },
+
+    repositionTrackInQueue(state, payload) {
+        // state.queuedTracks.splice(payload.to, 0, payload.track)
+
+        if (payload.to >= state.queuedTracks.length) {
+            let i = payload.to - state.queuedTracks.length + 1;
+            while (i--) {
+                state.queuedTracks.push(undefined);
+            }
+        }
+        state.queuedTracks.splice(payload.to, 0, state.queuedTracks.splice(payload.from, 1)[0]);
     },
 
     unloadTrack(state) {
