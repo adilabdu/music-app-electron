@@ -101,10 +101,12 @@ function imageSource(buffer) {
 }
 
 // TODO: find suitable app flow to figure where and when to run this function
-// populateDatabase().then(() => {
-//     // console.log('Albums in Library:', subFolders.names)
-//     subFolders.names.forEach(folder => populateDatabase(rootFolder + `${folder}/`))
-// })
+export async function runDatabasePopulation() {
+    populateDatabase().then(() => {
+        // console.log('Albums in Library:', subFolders.names)
+        subFolders.names.forEach(folder => populateDatabase(rootFolder + `${folder}/`))
+    })
+}
 
 // TODO: watch the local directory for delete / add event and update DB accordingly
 // const chokidar = require('chokidar');
