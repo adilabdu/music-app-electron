@@ -13,7 +13,7 @@
     </div>
 
     <div id="queueList" class="overflow-auto text-white">
-      <TrackSmallCard class="track-small-card" v-for="track in queuedTracks" :track="track" />
+      <TrackSmallCard class="track-small-card" v-for="(track, index) in queuedTracks" :index="index" :track="track" />
       <div v-if="queuedTracks.length > 0" class="h-[40px] w-full flex items-center justify-center">
         <button @click="clearQueue" class="text-[13px] text-[#FF8400]">Clear All</button>
       </div>
