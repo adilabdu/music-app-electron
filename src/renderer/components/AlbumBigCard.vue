@@ -2,7 +2,7 @@
 
   <div class="flex w-full h-[270px] justify-start px-[40px] px-[40px]">
 
-    <div class="min-w-[270px]">
+    <div class="w-[270px]">
       <img loading="lazy" alt="Album Artwork" v-if="!! album.artwork" :src="album.artwork" class="w-full aspect-square rounded-md" />
       <div v-else class="w-full aspect-square rounded-md bg-[#4D4D4D] bg-opacity-50 transition-colors duration-300 flex items-center justify-center">
         <TrackIcon :width="56" :class="'fill-[#818181]'" />
