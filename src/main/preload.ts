@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 const manager = require('./database/manager')
 const fsManager = require('./fs/manager')
-const { readLibrary } = require('./controllers/library')
+const { readLibrary, runDatabasePopulation } = require('./controllers/library')
 
 const initDB = () => {
   return manager.initialize()
@@ -122,5 +122,6 @@ contextBridge.exposeInMainWorld('electron', {
 
 contextBridge.exposeInMainWorld('io', {
   readLibrary: readLibrary,
-  readFile: fsManager.readFile
+  readFile: fsManager.readFile,
+  runDatabasePopulation: runDatabasePopulation
 })
