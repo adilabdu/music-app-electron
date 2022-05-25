@@ -4,6 +4,8 @@ import Home from '../pages/index.vue'
 import Listen from '../pages/listen.vue'
 import Browse from '../pages/browse.vue'
 
+import ArtistLayout from "../pages/artists.vue"
+
 import AlbumLayout from '../pages/albums/index.vue'
 import Albums from '../pages/albums/all.vue'
 import Album from '../pages/albums/single.vue'
@@ -43,7 +45,7 @@ const routes = [
     {
         path: '/artists',
         name: 'Artists',
-        component: Browse,
+        component: ArtistLayout,
     },
     {
         path: '/albums',
