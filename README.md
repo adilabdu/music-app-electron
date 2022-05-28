@@ -2,7 +2,7 @@
 
 ![image](./screenshot.jpg)
 
-A **Vue3** + **Electron** TypeScript based Apple Music clone application, including **Vite** and **Electron Builder**.
+A **Vue3** + **Electron** Apple Music clone application, including **Vite** and **Electron Builder**.
 </div>
 
 ### About
