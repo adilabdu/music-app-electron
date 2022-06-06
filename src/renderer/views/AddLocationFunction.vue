@@ -1,6 +1,6 @@
 <template>
 
-  <FunctionCard @clicked="getDirectory" class="function-card" :function-info="{ name: 'Add Location', description: 'Import your music library.' }">
+  <FunctionCard @click="runDatabasePopulation" class="function-card" :function-info="{ name: 'Add Location', description: 'Import your music library.' }">
 
     <template #icon>
       <PlusIcon class="function-icon" :width="48" :class="'fill-[#818181]'" />
@@ -15,8 +15,10 @@
   import FunctionCard from "../components/FunctionCard.vue";
   import PlusIcon from "../components/Icons/plus.vue";
 
-  function getDirectory() {
-    
+  function runDatabasePopulation() {
+    console.log('Initiate Database Population...')
+    window.io.runDatabasePopulation().then()
+    console.log('Database Population done.')
   }
 
 </script>
