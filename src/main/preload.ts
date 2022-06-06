@@ -29,7 +29,7 @@ const findPlaylist = (id) => {
 }
 
 const findAlbum = (id) => {
-  return require('../main/models/albums').Album.find(id)
+  return require('../main/models/albums').Album.find(id).get()
 }
 
 const findTrack = (id) => {
@@ -37,7 +37,7 @@ const findTrack = (id) => {
 }
 
 const findArtist = (id) => {
-  return require('../main/models/artists').Artist.find(id)
+  return require('../main/models/artists').Artist.find(id).get()
 }
 
 const whereTrack = (constraint) => {
