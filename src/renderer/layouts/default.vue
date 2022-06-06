@@ -2,7 +2,7 @@
 
   <Modal />
 
-  <div class="relative min-h-screen w-full flex">
+  <div class="relative min-h-screen w-full flex overflow-y-hidden">
 
     <Navigation />
 
