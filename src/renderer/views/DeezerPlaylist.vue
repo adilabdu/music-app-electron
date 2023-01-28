@@ -54,15 +54,15 @@
   const loading = ref(true)
 
   onMounted(() => {
-    fetch('https://cors-adil.herokuapp.com/https://api.deezer.com/playlist/' + props.playlistID + '/tracks?limit=' + display.value, true)
+    fetch('https://cors-anywhere-production-e634.up.railway.app/https://api.deezer.com/playlist/' + props.playlistID + '/tracks?limit=' + display.value, true)
   })
 
   function fetchPrevious() {
-    fetch('https://cors-adil.herokuapp.com/' + prev.value)
+    fetch('https://cors-anywhere-production-e634.up.railway.app/' + prev.value)
   }
 
   function fetchNext() {
-    fetch('https://cors-adil.herokuapp.com/' + next.value)
+    fetch('https://cors-anywhere-production-e634.up.railway.app/' + next.value)
   }
 
   function fetch(url, emits=false) {
