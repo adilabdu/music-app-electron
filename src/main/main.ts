@@ -3,6 +3,7 @@ import { join } from 'path';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
+    icon: 'favicon.png',
     width: 800,
     height: 600,
     minWidth: 400,
@@ -13,6 +14,7 @@ function createWindow () {
       contextIsolation: true,
     },
     autoHideMenuBar: true,
+    titleBarStyle: "hidden",
   });
 
   mainWindow.webContents.openDevTools();
