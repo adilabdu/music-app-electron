@@ -12,6 +12,7 @@ function createWindow () {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      webSecurity: false,
     },
     autoHideMenuBar: true,
     titleBarStyle: "hidden",
@@ -38,6 +39,7 @@ function createMiniPlayer () {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      webSecurity: false,
     },
     autoHideMenuBar: true,
     titleBarStyle: "customButtonsOnHover"
